@@ -42,7 +42,7 @@ class WPPW_Compiler {
         // $this->estLogger($press);
         // $this->logger->putLog($content);
 
-        echo "<p id='hugo'>$content $action</p>";
+        echo "<p id='hugoElement'>$content $action</p>";
     }
 
     public function estLogger($location)
@@ -85,7 +85,7 @@ class WPPW_Compiler {
         // $press = SITE_ROOT."/wp-content/plugins/pressword/hugo_log.txt";
         // $this->estLogger($press);
         // $this->logger->putLog($frontRes);
-        return "<p id='hugo'>$frontRes</p>";
+        return "<p id='hugoElement'>$frontRes</p>";
     }
 
     /**
@@ -100,7 +100,10 @@ class WPPW_Compiler {
     {
         // $url = get_option('pressword');
         // do extra logic to find out what should be done here
-        $url = get_option('hugopress-rest-input');
+        // $url = get_option('hugopress-rest-input');
+        $apis = get_option('pressword');
+
+        $url = $apis->{'hugo'};
         if ($this->checkAPIStatus($url)) {
             $this->postAPI(
                 $this->parseAction($this->app->action, $id, $content),
@@ -131,7 +134,7 @@ class WPPW_Compiler {
 
         echo "
     <style type='text/css'>
-    #hugo {
+    #hugoElement {
       float: $x;
       padding-$x: 15px;
       padding-top: 5px;
