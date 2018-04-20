@@ -10,7 +10,7 @@ jQuery(function ($) {
       $(`#${alias}-pressword-msgs`).empty();
 
       $.ajax({
-        url: pressword_post.ajax_url,
+        url: pressword_ajax.ajax_url,
         type: 'post',
         data: {
           action: 'test_pressword_api',
@@ -49,7 +49,7 @@ jQuery(function ($) {
       console.log(`clicked?, alias: ${alias}, url: ${endpoint}, ajaxUrl: ${pressword_post.ajax_url}`);
 
       $.ajax({
-        url: pressword_post.ajax_url,
+        url: pressword_ajax.ajax_url,
         type: 'POST',
         data: {
           action: 'set_new_api',
@@ -77,7 +77,7 @@ jQuery(function ($) {
       console.log(`clicked?, alias: ${alias}, ajaxUrl: ${pressword_post.ajax_url}`);
 
       $.ajax({
-        url: pressword_post.ajax_url,
+        url: pressword_ajax.ajax_url,
         type: 'POST',
         data: {
           action: 'remove_api',

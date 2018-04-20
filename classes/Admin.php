@@ -31,7 +31,7 @@ class WPPW_Admin {
   public function setup_admin_actions(){
     // add_action('admin_menu', array($this, 'create_hugopress_options_page'));
     // add_action('admin_init', array($this, 'create_hugopress_options'));
-    add_action('admin_head', array($this, 'api_css'));
+    // add_action('admin_head', array($this, 'api_css'));
     add_action('admin_menu', array($this, 'create_pressword_options_page'));
     add_action('admin_init', array($this, 'create_pressword_options'));
   }
@@ -157,15 +157,15 @@ class WPPW_Admin {
   }
 
   // submit_button();
+  //     settings_fields( 'pressword' );
+  //     do_settings_sections( 'pressword' );
   public function pressword_settings_page_content(){
     ?>
      <div class="wrap">
         <h2>PressWord Settings</h2>
         <form method="post" action="options.php">
-            <?php
-                settings_fields( 'pressword' );
-                do_settings_sections( 'pressword' );
-            ?>
+
+            <div id="pressword-root"></div>
           <!-- <p class="submit">
             <input name="Submit" type="submit" class="button-primary" value="<?php esc_attr_e('Save Changes'); ?>" />
           </p> -->
@@ -374,24 +374,22 @@ class WPPW_Admin {
   //     <div id ="hugopress-api-test-mssg" style="display: block;"></div>';
   // }
 
-  public function api_css() {
-    ?>
-      <style type='text/css'>
-        #pressword-api-display {
-          display: flex;
-          justify-content: center;
-          flex-direction: column;
-        }
-        .pressword-test-btn {
-          width: 20%;
-          align-self: flex-end;
-        }
-        .pressword-api-item {
-          width: 40%;
-          display: flex;
-          flex-direction: column;
-        }
-      </style>
-    <?php
-  }
+  // public function api_css() {
+  //     <style type='text/css'>
+  //       #pressword-api-display {
+  //         display: flex;
+  //         justify-content: center;
+  //         flex-direction: column;
+  //       }
+  //       .pressword-test-btn {
+  //         width: 20%;
+  //         align-self: flex-end;
+  //       }
+  //       .pressword-api-item {
+  //         width: 40%;
+  //         display: flex;
+  //         flex-direction: column;
+  //       }
+  //     </style>
+  // }
 }
