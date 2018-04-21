@@ -48,13 +48,13 @@ export default class AddSubscriber extends Component {
   render() {
     return (
       <div className='container'>
-        <div id="pressword-new-api-alias-container" class="form-inline">
-          <input id="pressword-new-api-alias-input" value="" class="form-inline" type="text"></input> &nbsp; Add API name
+        <div id="pressword-new-api-alias-container" className="form-inline">
+          <input id="pressword-new-api-alias-input" value="" className="form-inline" type="text"></input> &nbsp; Add API name
         </div>
-        <div id="pressword-new-api-url-container" class="form-inline">
+        <div id="pressword-new-api-url-container" className="form-inline">
           <input type="text" id="pressword-new-api-url-input" value=""/> &nbsp; Enter API url for PressWord broadcasting
         </div>
-        <button id="pressword-new-api-submit" class="btn" onClick={this.handleSubmit}>Add API</button>
+        <span id="pressword-new-api-submit" className="api-btn" onClick={this.handleSubmit}>Add API</span>
       </div>
     );
   }

@@ -1,3 +1,8 @@
+// common
+// @import 'common/subscriber';
+// @import 'common/addsub';
+// @import 'common/removesub';
+
 #pressword-api-display {
   display: flex;
   justify-content: center;
@@ -11,4 +16,31 @@
   width: 40%;
   display: flex;
   flex-direction: column;
+}
+
+.api-btn {
+  background: #999;
+  padding: 1em 2.4em;
+  width: 5vw;
+  font-size: .9em;
+  margin: 1em;
+  color: white;
+  text-decoration: none;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.container {
+  margin: 1% 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.api-item-actions {
+  margin: 1vw auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  max-width: 25vw;
 }

@@ -4,7 +4,8 @@ export default class RemoveSubscriber extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      subscribers: null
+      subscribers: null,
+      alias: ''
     }
     this.handleRemoval = this.handleRemoval.bind(this);
   }
@@ -13,8 +14,31 @@ export default class RemoveSubscriber extends Component {
     console.log('RemoveSubscriber has mountedd');
   }
 
-  handleRemoval(e) {
+  async handleRemoval(e) {
     console.log('check removal', e);
+    e.preventDefault();
+
+    let { alias } = this.props;
+    console.log(`api remove request check alias:${alias}`);
+
+    // $(`#${alias}-pressword-msgs`).empty();
+    this.emptyResponses();
+
+    try {
+      const res = await fetch(pressword_ajax.ajax_url, {
+        method: 'post',
+        body: JSON.stringify({
+          action: 'test_pressword_api',
+          alias: alias
+        })
+      })
+
+      this.setState({ res });
+    } catch (err) {
+      this.setState({
+        res: `${err}`
+      })
+    }
 
       // e.preventDefault();
       // let alias = $('#pressword-remove-alias-input').val();
@@ -47,7 +71,7 @@ export default class RemoveSubscriber extends Component {
         <div id="pressword-remove-api-alias-container" className="form-inline">
           <input id="pressword-remove-api-alias-input" value="" className="form-inline" type="text"></input> &nbsp; Enter API name
         </div>
-        <button id="pressword-remove-api-submit" className="btn" onClick={this.handleRemoval}>Add API</button>
+        <span id="pressword-remove-api-submit" className="api-btn" onClick={this.handleRemoval}>Remove API</span>
       </div>
     );
   }

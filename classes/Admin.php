@@ -48,6 +48,11 @@ class WPPW_Admin {
       // api removal
       add_action('wp_ajax_nopriv_remove_api', array($this, 'remove_api'));
       add_action('wp_ajax_remove_api', array($this, 'remove_api'));
+
+      // server apis
+      add_action('wp_ajax_nopriv_get_pressword_apis', array($this, 'get_pressword_apis'));
+      add_action('wp_ajax_get_pressword_apis', array($this, 'get_pressword_apis'));
+
   }
 
   public function set_defaults_option() {
@@ -57,6 +62,21 @@ class WPPW_Admin {
       );
       update_option('pressword', $apis, true);
     }
+  }
+
+  public function get_pressword_apis(){
+    $stuff = $_POST['action'];
+    $apis = get_option('pressword');
+
+    // var_dump('getting apis', $apis);
+    $json = json_encode(
+      array(
+        'apis' => $apis
+      )
+    );
+
+    echo $json;
+    die();
   }
 
   public function test_pressword_api(){

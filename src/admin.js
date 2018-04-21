@@ -2,9 +2,9 @@ import './scss/style.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Container from './components/Container';
+import Pressword from './components/Pressword';
 
 ReactDOM.render(
-  <Container /> ,
+  <Pressword /> ,
   document.querySelector('#pressword-root')
 );
