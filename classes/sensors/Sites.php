@@ -34,14 +34,14 @@ class WPPW_Sensors_Sites extends WPPW_AbstractSensor {
   public function HookEvents() {
     $this->addHooks(
       array (
-        'wpmu_new_blog',
-        'archive_blog',
-        'unarchive_blog',
-        'activate_blog',
-        'deactivate_blog',
-        'delete_blog',
-        'add_user_to_blog',
-        'remove_user_from_blog'
+        // 'wpmu_new_blog',
+        // 'archive_blog',
+        // 'unarchive_blog',
+        // 'activate_blog',
+        // 'deactivate_blog',
+        // 'delete_blog',
+        // 'add_user_to_blog',
+        // 'remove_user_from_blog'
       )
     );
   }

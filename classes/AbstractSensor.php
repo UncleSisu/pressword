@@ -20,10 +20,8 @@ abstract class WPPW_AbstractSensor {
 
   public function addHooks($actions) {
     foreach ($actions as $action) {
-      add_action($action, function($id, $content) use ($action) {
-        $this->app->action = $action;
-        // $this->app->compiler->mockPresswordNotif();
-        $this->app->compiler->instructPressword($id, $content);
+      add_action($action, function($id, $content = NULL) use ($action) {
+        $this->app->compiler->triggerAPIs($id, $action, $content);
       }, 10, 2);
     }
   }

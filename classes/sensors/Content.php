@@ -102,10 +102,10 @@ class WPPW_Sensors_Content extends WPPW_AbstractSensor {
   public function HookEvents() {
     $this->addHooks(
       array (
-        'edit_category',
-        'create_category',
-        'create_post_tag',
-        'wp_head',
+        // 'edit_category',
+        // 'create_category',
+        // 'create_post_tag',
+        // 'wp_head',
 
         /* page actions */
         'publish_page', // when page is published
@@ -114,7 +114,7 @@ class WPPW_Sensors_Content extends WPPW_AbstractSensor {
         'publish_post',
 
         // 'publish_future_post',
-        // 'delete_post',
+        'delete_post',
         'wp_trash_post',
         'untrash_post'
       )

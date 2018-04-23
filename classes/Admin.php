@@ -29,9 +29,6 @@ class WPPW_Admin {
 
   // TODO: allow actions to be hooked
   public function setup_admin_actions(){
-    // add_action('admin_menu', array($this, 'create_hugopress_options_page'));
-    // add_action('admin_init', array($this, 'create_hugopress_options'));
-    // add_action('admin_head', array($this, 'api_css'));
     add_action('admin_menu', array($this, 'create_pressword_options_page'));
     add_action('admin_init', array($this, 'create_pressword_options'));
   }
@@ -58,7 +55,14 @@ class WPPW_Admin {
   public function set_defaults_option() {
     if(!is_array(get_option('pressword'))) {
       $apis = array(
-        'hugo' => 'http://listener:3000/hugopress/endpoints'
+        array(
+          'name' => 'hugo',
+          'endpoint' => 'http://listener:3000/hugopress/endpoints',
+          'actions' => array(
+            'publish_post',
+            'untrash_post'
+          )
+        )
       );
       update_option('pressword', $apis, true);
     }
@@ -68,7 +72,6 @@ class WPPW_Admin {
     $stuff = $_POST['action'];
     $apis = get_option('pressword');
 
-    // var_dump('getting apis', $apis);
     $json = json_encode(
       array(
         'apis' => $apis
@@ -100,7 +103,7 @@ class WPPW_Admin {
 
 
   public function set_new_api(){
-    $alias = $_POST['alias'];
+    $name = $_POST['alias'];
     $endpoint = $_POST['endpoint'];
 
     if( $alias == '' || $endpoint == '' ) {
@@ -115,16 +118,25 @@ class WPPW_Admin {
     }
 
     $apis = get_option('pressword');
-    $apis[$alias] = $endpoint;
+    $apis[$name] = array(
+      'name' => $name,
+      'endpoint' => $endpoint,
+    );
 
     update_option('pressword', $apis, true);
-
+    $updated_apis = get_option('pressword');
     $json = json_encode(
       array(
-        'alias' => $alias,
-        'endpoint' => $endpoint
+        'apis' => $updated_apis
       )
     );
+
+    // $json = json_encode(
+    //   array(
+    //     'alias' => $alias,
+    //     'endpoint' => $endpoint
+    //   )
+    // );
 
     echo $json;
     die();
@@ -148,10 +160,11 @@ class WPPW_Admin {
     unset($apis[$alias]);
 
     update_option('pressword', $apis, true);
+    $updated_apis = get_option('pressword');
 
     $json = json_encode(
       array(
-        'alias' => $alias
+        'apis' => $updated_apis
       )
     );
 
@@ -176,19 +189,15 @@ class WPPW_Admin {
       add_options_page($page_title, $menu_title, $capability, $slug, $callback);
   }
 
-  // submit_button();
-  //     settings_fields( 'pressword' );
-  //     do_settings_sections( 'pressword' );
   public function pressword_settings_page_content(){
+
+    settings_fields( 'pressword' );
+    do_settings_sections( 'pressword' );
     ?>
      <div class="wrap">
         <h2>PressWord Settings</h2>
         <form method="post" action="options.php">
-
-            <div id="pressword-root"></div>
-          <!-- <p class="submit">
-            <input name="Submit" type="submit" class="button-primary" value="<?php esc_attr_e('Save Changes'); ?>" />
-          </p> -->
+          <div id="pressword-root"></div>
         </form>
         </div>
     <?php
@@ -196,12 +205,18 @@ class WPPW_Admin {
 
   // this should trigger on add
   public function create_pressword_options(){
-      // $this->pressword_begin_api();
-    $this->pressword_add_endpoint();
-    $this->pressword_remove_endpoint();
-    $this->pressword_display_endpoints();
+    // $this->pressword_begin_api();
+    // $this->pressword_add_endpoint();
+    // $this->pressword_remove_endpoint();
+    // $this->pressword_display_endpoints();
+      register_setting(
+          'pressword',
+          'pressword'
+      );
+      $this->set_defaults_option();
   }
 
+  // Not being used
   public function pressword_add_endpoint(){
       add_settings_section(
           'pressword-new-api',
@@ -305,111 +320,4 @@ class WPPW_Admin {
   public function checkAPI($url) {
       return wp_remote_get( $url );
   }
-
-
-  // public function create_hugopress_options(){
-  //     $this->hugopress_endpoint_setting();
-  //     $this->hugopress_api_test();
-  // }
-
-  // public function hugopress_endpoint_setting(){
-  //     add_settings_section(
-  //         'hugopress-rest-section',
-  //         'HugoPress REST API Settings',
-  //         array($this, 'display_hugopress_settings_section'),
-  //         'wp-hugopress'
-  //     );
-  //     add_settings_field(
-  //         'hugopress-rest-input',
-  //         'HugoPress REST endpoint',
-  //         array($this, 'display_hugopress_url_input'),
-  //         'wp-hugopress',
-  //         'hugopress-rest-section',
-  //         array( 'label_for' => 'hugopress-rest-input' )
-  //     );
-  //     register_setting(
-  //         'wp-hugopress',
-  //         'hugopress-rest-input'
-  //     );
-  // }
-
-  // public function hugopress_api_test(){
-  //     add_settings_field(
-  //         'hugopress-api-test',
-  //         'HugoPress REST API test',
-  //         array($this, 'display_hugopress_api_test'),
-  //         'wp-hugopress',
-  //         'hugopress-rest-section',
-  //         array( 'label_for' => 'hugopress-api-test' )
-  //     );
-  //     register_setting(
-  //         'wp-hugopress',
-  //         'hugopress-api-test'
-  //     );
-  // }
-
-  // public function pressword_begin_api(){
-  //     add_settings_field(
-  //         'pressword-add-api',
-  //         'PressWord add API name',
-  //         array($this, 'begin_pressword_api'),
-  //         'wp-hugopress',
-  //         'pressword-api-section',
-  //         array( 'label_for' => 'pressword-add-api' )
-  //     );
-  //     register_setting(
-  //         'wp-hugopress',
-  //         'pressword-add-api'
-  //     );
-  // }
-
-
-  /**
-   * Sanitize each setting field as needed
-   *
-   * @param array $input Contains all settings fields as array keys
-   */
-  // public function sanitize($input){
-  //     $newinput = array();
-  //     // $newinput['text_string'] = $input['text_string'];
-  //     $newinput['text_string'] = $input['text_string'] ? 'yah' : 'nah';
-  //     return $newinput;
-  // }
-
-  // public function display_hugopress_settings_section($args){
-  //   echo '<p>Configure HugoPress REST API specific settings</p>';
-  // }
-  //
-  // public function display_hugopress_url_input($args){
-  //   $label = $args["label_for"];
-  //   echo '<input type="text" id="'.$label.'" name="'.$label.'" value="'.get_option($label).'"/> HugoPress REST API base url';
-  // }
-  //
-  // public function display_hugopress_api_test($args){
-  //   $label = $args["label_for"];
-  //   echo '<div id="'.$label.'-form" class="form-inline">
-  //     <input id="'.$label.'-input" class="form-inline" type="text" style="display: inline;" disabled></input>
-  //     <button id="'.$label.'-submit" class="btn" style="display: inline-block;">Submit</button>
-  //     </div>
-  //     <div id ="hugopress-api-test-mssg" style="display: block;"></div>';
-  // }
-
-  // public function api_css() {
-  //     <style type='text/css'>
-  //       #pressword-api-display {
-  //         display: flex;
-  //         justify-content: center;
-  //         flex-direction: column;
-  //       }
-  //       .pressword-test-btn {
-  //         width: 20%;
-  //         align-self: flex-end;
-  //       }
-  //       .pressword-api-item {
-  //         width: 40%;
-  //         display: flex;
-  //         flex-direction: column;
-  //       }
-  //     </style>
-  // }
 }

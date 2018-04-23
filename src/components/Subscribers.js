@@ -16,7 +16,7 @@ export default class Subscribers extends Component {
       {
         this.props.apis.map((api, id) => {
           return (
-            <Subscriber key={id} alias={api.alias} endpoint={api.endpoint} />
+            <Subscriber key={id} name={api.name} endpoint={api.endpoint} />
           )
         })
       }

@@ -40,7 +40,7 @@ class WPPW_Sensors_PluginsThemes extends WPPW_AbstractSensor {
   public function HookEvents() {
     $this->addHooks(
       array (
-        'switch_theme'
+        // 'switch_theme'
       )
     );
   }

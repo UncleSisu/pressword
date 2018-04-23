@@ -112,28 +112,28 @@ class Subscriber extends Component {
   }
 
   render() {
-    const { alias, endpoint } = this.props;
+    const { name, endpoint } = this.props;
     const resMessages = msgs => (
-      <div id={`response-msgs-${alias}`}>
+      <div id={`response-msgs-${name}`}>
         {msgs}
       </div>
     );
 
     return (
       <div className="pressword-api-item">
-        <p id={alias}>API name: {alias}, &nbsp; API endpoint: {alias}</p>
+        <p id={name}>API name: {name}, &nbsp; API endpoint: {name}</p>
       <div className="api-item-actions">
-        <span id={`${alias}-submit`} className="api-btn pressword-test-btn" onClick={this.handleTest}>Test</span>
+        <span id={`${name}-submit`} className="api-btn pressword-test-btn" onClick={this.handleTest}>Test</span>
         <span id="pressword-remove-api-submit" className="api-btn" onClick={this.handleRemoval}>Remove API</span>
       </div>
-        <div id ={`${alias}-pressword-msgs`}>{resMessages(this.state.res)}</div>
+        <div id ={`${name}-pressword-msgs`}>{resMessages(this.state.res)}</div>
       </div>
     );
   }
 }
 
 Subscriber.propTypes = {
-  alias: PropTypes.string,
+  name: PropTypes.string,
   endpoint: PropTypes.string
 };
 

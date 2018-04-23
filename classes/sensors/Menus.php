@@ -32,13 +32,13 @@ class WPPW_Sensors_Menus extends WPPW_AbstractSensor {
   public function HookEvents() {
     $this->addHooks(
       array (
-        'wp_create_nav_menu',
-        'wp_delete_nav_menu',
-        'wp_update_nav_menu',
-        'wp_update_nav_menu_item',
+        // 'wp_create_nav_menu',
+        // 'wp_delete_nav_menu',
+        // 'wp_update_nav_menu',
+        // 'wp_update_nav_menu_item',
         // 'admin_menu',
-        'customize_register',
-        'customize_save_after'
+        // 'customize_register',
+        // 'customize_save_after'
       )
     );
   }

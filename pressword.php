@@ -44,53 +44,40 @@ class Pressword {
 
   /**
    * Compiler object.
-   *
    * @var WPPW_Compiler
-   */
-  public $compiler;
 
-  /**
    * Admin object.
-   *
    * @var WPPW_Admin
-   */
-  public $admin;
-
-  /**
+   *
    * Logger object.
-   *
    * @var Logger
-   */
-  public $logger;
-
-  /**
+   *
    * Sensor object.
-   *
    * @var Sensors
-   */
-  public $sensors;
-
-  /**
-   * current wp action.
    *
+   * current wp action.
    * @var action
    */
+  public $compiler;
+  public $admin;
+  public $logger;
+  public $sensors;
   public $action = 'nope';
 
-    /**
-     * Standard singleton pattern.
-     * WARNING! To ensure the system always works as expected, AVOID using this method.
-     * Instead, make use of the plugin instance provided by 'wsal_init' action.
-     * @return Pressword Returns the current plugin instance.
-     */
-    public static function GetInstance()
-    {
-        static $instance = null;
-        if (!$instance) {
-            $instance = new self();
-        }
-        return $instance;
+  /**
+   * Standard singleton pattern.
+   * WARNING! To ensure the system always works as expected, AVOID using this method.
+   * Instead, make use of the plugin instance provided by 'wsal_init' action.
+   * @return Pressword Returns the current plugin instance.
+   */
+  public static function GetInstance()
+  {
+    static $instance = null;
+    if (!$instance) {
+      $instance = new self();
     }
+    return $instance;
+  }
 
   /**
    * Called at load time, hooks into WP core

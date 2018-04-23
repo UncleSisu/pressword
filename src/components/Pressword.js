@@ -27,12 +27,7 @@ export default class Pressword extends Component {
       .then(res => {
         const apis = res.apis;
         console.log('wtf apis', apis);
-        const formatted = Object.keys(apis).map(api => {
-          return {
-            alias: api,
-            endpoint: apis[api]
-          }
-        });
+        const formatted = Object.keys(apis).map(key => apis[key]);
         this.setState({ apis: formatted });
       })
       .catch(err => console.log('pull apis error', err))

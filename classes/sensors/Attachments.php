@@ -27,8 +27,8 @@ class WPPW_Sensors_Attachments extends WPPW_AbstractSensor {
   public function HookEvents() {
     $this->addHooks(
       array (
-        'add_attachment',
-        'delete_attachment',
+        // 'add_attachment',
+        // 'delete_attachment',
         // 'admin_init'
       )
     );

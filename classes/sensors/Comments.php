@@ -33,14 +33,14 @@ class WPPW_Sensors_Comments extends WPPW_AbstractSensor {
   public function HookEvents() {
     $this->addHooks(
       array (
-        'edit_comment',
-        'transition_comment_status',
-        'spammed_comment',
-        'unspammed_comment',
-        'trashed_comment',
-        'untrashed_comment',
-        'deleted_comment',
-        'comment_post'
+        // 'edit_comment',
+        // 'transition_comment_status',
+        // 'spammed_comment',
+        // 'unspammed_comment',
+        // 'trashed_comment',
+        // 'untrashed_comment',
+        // 'deleted_comment',
+        // 'comment_post'
       )
     );
   }

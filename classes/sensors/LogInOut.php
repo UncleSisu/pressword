@@ -29,8 +29,8 @@ class WPPW_Sensors_LogInOut extends WPPW_AbstractSensor {
   public function HookEvents() {
     $this->addHooks(
       array (
-        'wp_login',
-        'wp_logout',
+        // 'wp_login',
+        // 'wp_logout',
       )
     );
   }

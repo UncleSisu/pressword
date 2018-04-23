@@ -4,7 +4,10 @@ import ReactDOM from 'react-dom';
 
 import Pressword from './components/Pressword';
 
-ReactDOM.render(
-  <Pressword /> ,
-  document.querySelector('#pressword-root')
-);
+const root = document.querySelector('#pressword-root');
+if (root) {
+  ReactDOM.render(
+    <Pressword /> ,
+    document.querySelector('#pressword-root')
+  );
+}
