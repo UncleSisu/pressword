@@ -55,7 +55,7 @@ class WPPW_Admin {
   public function set_defaults_option() {
     if(!is_array(get_option('pressword'))) {
       $apis = array(
-        array(
+        'hugo' => array(
           'name' => 'hugo',
           'endpoint' => 'http://listener:3000/hugopress/endpoints',
           'actions' => array(
@@ -82,16 +82,17 @@ class WPPW_Admin {
     die();
   }
 
+  // needs to be updated
   public function test_pressword_api(){
-    $alias = $_POST['alias'];
-    $api = get_option('pressword')[$alias];
+    $name = $_POST['name'];
+    $api = get_option('pressword')[$name];
     $res = $this->checkAPI($api);
 
     if ($res) {
       $res = json_decode($res['body'], true);
       echo json_encode(
         array(
-          'alias' => $alias,
+          'name' => $name,
           'data' => $res
         )
       );
@@ -103,15 +104,16 @@ class WPPW_Admin {
 
 
   public function set_new_api(){
-    $name = $_POST['alias'];
+    $name = $_POST['name'];
     $endpoint = $_POST['endpoint'];
 
-    if( $alias == '' || $endpoint == '' ) {
+    if( $name == '' || $endpoint == '' ) {
       die(
         json_encode(
           array(
             'success' => false,
-            'message' => 'Missing required information.'
+            'message' => 'Missing required information.',
+            'info' => $_POST
           )
         )
       );
@@ -122,8 +124,8 @@ class WPPW_Admin {
       'name' => $name,
       'endpoint' => $endpoint,
     );
-
     update_option('pressword', $apis, true);
+
     $updated_apis = get_option('pressword');
     $json = json_encode(
       array(
@@ -131,21 +133,14 @@ class WPPW_Admin {
       )
     );
 
-    // $json = json_encode(
-    //   array(
-    //     'alias' => $alias,
-    //     'endpoint' => $endpoint
-    //   )
-    // );
-
     echo $json;
     die();
   }
 
   public function remove_api(){
-    $alias = $_POST['alias'];
+    $name = $_POST['name'];
 
-    if( $alias == '') {
+    if( $name == '') {
       die(
         json_encode(
           array(
@@ -157,7 +152,7 @@ class WPPW_Admin {
     }
 
     $apis = get_option('pressword');
-    unset($apis[$alias]);
+    unset($apis[$name]);
 
     update_option('pressword', $apis, true);
     $updated_apis = get_option('pressword');

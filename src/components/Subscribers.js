@@ -1,26 +1,18 @@
 import React, { Component } from 'react';
 import Subscriber from './Subscriber';
 
-export default class Subscribers extends Component {
-  // constructor(props) {
-  //   super(props)
-  // }
-  //
-  componentDidMount() {
-    console.log('Subscribers has mounted', this.props);
-  }
+export default props => {
 
-  render() {
-    return (
-      <div id="pressword-api-display" className="container">
+  const apis = Object.keys(props.apis);
+  return (
+    <div id="pressword-api-display" className="container">
       {
-        this.props.apis.map((api, id) => {
+        apis.length && apis.map((api, id) => {
           return (
-            <Subscriber key={id} name={api.name} endpoint={api.endpoint} />
+            <Subscriber key={id} name={props.apis[api].name} endpoint={props.apis[api].endpoint} />
           )
         })
       }
-      </div>
-    );
-  }
+    </div>
+  )
 }

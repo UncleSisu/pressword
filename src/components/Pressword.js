@@ -2,43 +2,40 @@ import React, { Component } from 'react';
 import AddSubscriber from './AddSubscriber';
 import Subscribers from './Subscribers';
 // import RemoveSubscriber from './RemoveSubscriber';
+import { connect } from 'react-redux'
+import { getApisAction } from '../subscribersActions'
 
-export default class Pressword extends Component {
+class Pressword extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      visible: true,
-      apis: []
-    }
+    this.state = props;
   }
 
-  // async componentDidMount() {
-  componentDidMount() {
-    const response = fetch(pressword_ajax.ajax_url, {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
-      },
-      body: `action=get_pressword_apis&_wpnonce=${window.custom_nonce}`,
-      credentials: 'same-origin'
-    })
+  componentWillReceiveProps(nextProps) {
+    this.setState(nextProps.subscribers);
+  }
 
-    response.then(res => res.json())
-      .then(res => {
-        const apis = res.apis;
-        console.log('wtf apis', apis);
-        const formatted = Object.keys(apis).map(key => apis[key]);
-        this.setState({ apis: formatted });
-      })
-      .catch(err => console.log('pull apis error', err))
+  componentDidMount() {
+    // initial pull of api object
+    this.props.getApis();
   }
 
   render() {
     return (
       <div className='container'>
         <AddSubscriber />
-        { this.state.apis && <Subscribers apis={this.state.apis}/> }
+        { this.state.subscribers && <Subscribers apis={this.state.subscribers}/> }
       </div>
     );
   }
 }
+
+const mapStateToProps = ({ subscribers }) => ({
+  subscribers
+})
+
+const mapDispatchToProps = dispatch => ({
+  getApis: () => dispatch(getApisAction())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Pressword)
