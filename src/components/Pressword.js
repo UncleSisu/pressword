@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import AddSubscriber from './AddSubscriber';
 import Subscribers from './Subscribers';
-// import RemoveSubscriber from './RemoveSubscriber';
 import { connect } from 'react-redux'
 import { getApisAction } from '../subscribersActions'
 

@@ -43,8 +43,8 @@ class WPPW_Admin {
       add_action('wp_ajax_set_new_api', array($this, 'set_new_api'));
 
       // api removal
-      add_action('wp_ajax_nopriv_remove_api', array($this, 'remove_api'));
-      add_action('wp_ajax_remove_api', array($this, 'remove_api'));
+      add_action('wp_ajax_nopriv_delete_api', array($this, 'delete_api'));
+      add_action('wp_ajax_delete_api', array($this, 'delete_api'));
 
       // server apis
       add_action('wp_ajax_nopriv_get_pressword_apis', array($this, 'get_pressword_apis'));
@@ -137,7 +137,7 @@ class WPPW_Admin {
     die();
   }
 
-  public function remove_api(){
+  public function delete_api(){
     $name = $_POST['name'];
 
     if( $name == '') {

@@ -6,10 +6,15 @@ export const postApiAction = payload => ({
   payload,
 })
 
-// export const getApisAction = payload => ({
-//   type: types.GET_APIS,
-//   payload,
-// })
+export const deleteApiAction = payload => ({
+  type: types.DELETE_API,
+  payload,
+})
+
+export const testApiAction = payload => ({
+  type: types.TEST_API,
+  payload,
+})
 
 export const getApisAction = () => ({
   type: types.GET_APIS
