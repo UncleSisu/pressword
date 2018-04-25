@@ -7,9 +7,9 @@ import {
 import configureStore from './configureStore';
 import rootReducer from './rootReducer'; 
 import rootSaga from './sagas/rootSaga'
+import Pressword from './components/Pressword';
 
 const root = document.querySelector('#pressword-root');
-import Pressword from './components/Pressword';
 const store = configureStore({});
 store.runSaga(rootSaga)
 

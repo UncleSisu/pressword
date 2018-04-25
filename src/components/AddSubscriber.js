@@ -2,21 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { postApiAction } from '../subscribersActions'
 import Checkbox from './Checkbox'
-// import typeConverter from '../utils/typeConverter'
+import wpHooks from '../utils/wpHooks'
 
-const actions = [
-  'Publish',
-  'Trash',
-  'Edit'
-];
-
-const types = [
-  'Page',
-  'Attachment',
-  'Comment',
-  'Post',
-  'Category'
-];
+const actions = Object.keys(wpHooks.Post);
+const types = Object.keys(wpHooks);
 
 class AddSubscriber extends Component {
   constructor(props) {
@@ -30,7 +19,7 @@ class AddSubscriber extends Component {
     return {
       name: "",
       endpoint: "",
-      checks: []
+      hooks: null
     }
   }
 
@@ -43,39 +32,40 @@ class AddSubscriber extends Component {
   }
 
   componentWillMount() {
-    // this.selectedCheckboxes = new Set();
-    // this.selectedCheckboxes = new Map();
-    this.selectedCheckboxes = {};
+    this.selectedCheckboxes = types.reduce((acc, curr) => {
+      acc[curr] = new Set()
+      return acc;
+    }, {})
   }
 
-  toggleCheckbox(label, type) {
-    // add error message
-    if (!type) return;
-    const lab = label.toLowerCase();
-    const typ = type.toLowerCase();
-
-    if (this.selectedCheckboxes[typ][lab]) {
-      delete this.selectedCheckboxes[typ][lab];
+  toggleCheckbox(type, label) {
+    if (this.selectedCheckboxes[type].has(label)) {
+      this.selectedCheckboxes[type].delete(label);
     } else {
-      this.selectedCheckboxes[typ][lab] = lab;
+      this.selectedCheckboxes[type].add(label);
     }
 
-    // if (this.selectedCheckboxes.has(label.toLowerCase())) {
-    //   this.selectedCheckboxes.delete(label.toLowerCase());
-    // } else {
-    //   this.selectedCheckboxes.add(label.toLowerCase());
-    // }
+    const hooks = Object.keys(this.selectedCheckboxes)
+      .reduce((acc, curr) => {
+        let acts = Array.from(this.selectedCheckboxes[curr]);
+        if (acts.length) {
+          acts.forEach(act => {
+            acc = acc.concat(wpHooks[curr][act]);
+          })
+        }
+        return acc;
+      }, []);
 
-    this.setState({
-      checks: Array.from(this.selectedCheckboxes)
-    }, () => console.log('recent checks in state', this.state.checks));
+    this.setState({ hooks }, () => console.log('recent checks in state', this.state.hooks));
   }
 
   handleSubmit(e) {
     console.log('check submit', this.state);
+    const { name, endpoint, hooks } = this.state;
     this.props.postApi({
-      name: this.state.name,
-      endpoint: this.state.endpoint
+      name,
+      endpoint,
+      hooks
     })
     this.resetState();
   }
@@ -90,11 +80,7 @@ class AddSubscriber extends Component {
   createCheckboxes() {
     return types.map(type => (
       <div key={type} className="check-typegroup">
-        <Checkbox
-          label={type}
-          handleCheckboxChange={this.toggleCheckbox}
-          key={type}
-        />
+        <h2>{type}</h2>
         <div className="check-actiongroup">
           {actions.map( action => (
             <Checkbox

@@ -67,7 +67,7 @@
 .check-typegroup {
   display: flex;
   flex-direction: column;
-  margin: 2%;
+  margin: 1%;
   width: 20%;
   & > .checkbox {
     font-weight: bold;
@@ -75,5 +75,4 @@
 }
 
 .check-actiongroup {
-  margin:10% 0 0 15%;
 }

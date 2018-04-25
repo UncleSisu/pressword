@@ -3,7 +3,6 @@ import { put, call } from 'redux-saga/effects'
 import { postApi, getApis, deleteApi } from './api'
 import * as types from './constants/actionTypes'
 
-// Responsible for making PUT request to AWS API gateway
 // and then instructing the saga middleware on the next line of action,
 // for success or failure
 export function* postApiSaga ({ payload }) {

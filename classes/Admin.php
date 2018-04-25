@@ -39,8 +39,8 @@ class WPPW_Admin {
       add_action('wp_ajax_test_pressword_api', array($this, 'test_pressword_api'));
 
       // api addition
-      add_action('wp_ajax_nopriv_set_new_api', array($this, 'set_new_api'));
-      add_action('wp_ajax_set_new_api', array($this, 'set_new_api'));
+      add_action('wp_ajax_nopriv_post_new_api', array($this, 'post_new_api'));
+      add_action('wp_ajax_post_new_api', array($this, 'post_new_api'));
 
       // api removal
       add_action('wp_ajax_nopriv_delete_api', array($this, 'delete_api'));
@@ -58,7 +58,7 @@ class WPPW_Admin {
         'hugo' => array(
           'name' => 'hugo',
           'endpoint' => 'http://listener:3000/hugopress/endpoints',
-          'actions' => array(
+          'hooks' => array(
             'publish_post',
             'untrash_post'
           )
@@ -103,9 +103,10 @@ class WPPW_Admin {
   }
 
 
-  public function set_new_api(){
+  public function post_new_api(){
     $name = $_POST['name'];
     $endpoint = $_POST['endpoint'];
+    $hooks = $_POST['hooks'];
 
     if( $name == '' || $endpoint == '' ) {
       die(
@@ -123,6 +124,7 @@ class WPPW_Admin {
     $apis[$name] = array(
       'name' => $name,
       'endpoint' => $endpoint,
+      'hooks' => $hooks
     );
     update_option('pressword', $apis, true);
 

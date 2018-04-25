@@ -17,3 +17,8 @@ export function* watchApiDelete () {
   console.log('watchApiDelete triggered')
   yield takeLatest(types.DELETE_API, deleteApiSaga)
 }
+
+export function* watchApiTest () {
+  console.log('watchApiTest triggered')
+  yield takeLatest(types.TEST_API, deleteApiSaga)
+}
