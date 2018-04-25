@@ -61,6 +61,10 @@ class WPPW_Admin {
           'hooks' => array(
             'publish_post',
             'untrash_post'
+          ),
+          'properties' => array(
+            'name' => 'test',
+            'value' => 'foobar'
           )
         )
       );
@@ -107,6 +111,7 @@ class WPPW_Admin {
     $name = $_POST['name'];
     $endpoint = $_POST['endpoint'];
     $hooks = $_POST['hooks'];
+    $properties = $_POST['properties'];
 
     if( $name == '' || $endpoint == '' ) {
       die(
@@ -124,7 +129,8 @@ class WPPW_Admin {
     $apis[$name] = array(
       'name' => $name,
       'endpoint' => $endpoint,
-      'hooks' => $hooks
+      'hooks' => $hooks,
+      'properties' => $properties
     );
     update_option('pressword', $apis, true);
 
