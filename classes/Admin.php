@@ -57,7 +57,7 @@ class WPPW_Admin {
       $apis = array(
         'hugo' => array(
           'name' => 'hugo',
-          'endpoint' => 'http://listener:3000/hugopress/endpoints',
+          'uri' => 'http://listener:3000/hugopress/endpoints',
           'hooks' => array(
             'publish_post',
             'untrash_post'
@@ -73,7 +73,6 @@ class WPPW_Admin {
   }
 
   public function get_pressword_apis(){
-    $stuff = $_POST['action'];
     $apis = get_option('pressword');
 
     $json = json_encode(
@@ -109,11 +108,11 @@ class WPPW_Admin {
 
   public function post_new_api(){
     $name = $_POST['name'];
-    $endpoint = $_POST['endpoint'];
+    $uri = $_POST['uri'];
     $hooks = $_POST['hooks'];
     $properties = $_POST['properties'];
 
-    if( $name == '' || $endpoint == '' ) {
+    if( $name == '' || $uri == '' ) {
       die(
         json_encode(
           array(
@@ -128,7 +127,7 @@ class WPPW_Admin {
     $apis = get_option('pressword');
     $apis[$name] = array(
       'name' => $name,
-      'endpoint' => $endpoint,
+      'uri' => $uri,
       'hooks' => $hooks,
       'properties' => $properties
     );
@@ -198,7 +197,7 @@ class WPPW_Admin {
     do_settings_sections( 'pressword' );
     ?>
      <div class="wrap">
-        <h2>PressWord Settings</h2>
+        <h2>PressWord</h2>
         <form method="post" action="options.php">
           <div id="pressword-root"></div>
         </form>

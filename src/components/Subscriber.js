@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { deleteApiAction } from '../subscribersActions'
 import PropTypes from 'prop-types';
-// import Responses from './ApiResponses';
 
 
 class Subscriber extends Component {
@@ -12,7 +11,7 @@ class Subscriber extends Component {
     //   visible: null,
     //   res: null
     // }
-    this.handleTest = this.handleTest.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
     this.handleDelete = this.handleDelete.bind(this);
   }
 
@@ -24,28 +23,54 @@ class Subscriber extends Component {
     // return this.state.res ? this.setState({ res: null }) : null;
   }
 
-  handleTest(e) {
+  handleEdit(e) {
     console.log('check test', e);
   }
 
   handleDelete(e) {
-    console.log('handleDelete', this.props);
+    // console.log('handleDelete', this.props);
     this.props.deleteApi({
       name: this.props.name
     })
   }
 
   render() {
-    const { name, endpoint } = this.props;
-
+    const { name, uri, properties, hooks } = this.props;
     return (
       <div className="pressword-api-item">
-        <p id={name}>API name: {name}, &nbsp; API endpoint: {name}</p>
-      <div className="api-item-actions">
-        <span id={`${name}-submit`} className="api-btn pressword-test-btn" onClick={this.handleTest}>Test</span>
-        <span id="pressword-remove-api-submit" className="api-btn" onClick={this.handleDelete}>Delete API</span>
-      </div>
-      {/* <Responses name={name} responses={this.state.responses} /> */}
+        <p><span className="pressword-title">Name:</span> {name}</p>
+        <p><span className="pressword-title">URI:</span> {uri}</p>
+        <div className="pressword-api-item-props">
+          <p className="pressword-title">Properties:</p>
+          { Array.isArray(properties) ? properties.map(prop => {
+            return (
+              <pre>
+                {`
+                {
+                  name: ${prop.name},
+                  value: ${prop.value}
+                }
+                `}
+              </pre>
+            )
+          }) : 'No properties configured'}
+        </div>
+
+        <div className="pressword-api-item-hooks">
+          <p className="pressword-title">Hooks:</p>
+          { hooks.length ?
+            <pre>
+              {`
+                ${hooks}
+              `}
+
+            </pre>
+          : 'No hooks configured'}
+        </div>
+        <div className="api-item-actions">
+          <span className="pressword-edit-btn api-btn" onClick={this.handleEdit}>Edit API</span>
+          <span className="pressword-remove-api-btn api-btn" onClick={this.handleDelete}>Delete API</span>
+        </div>
       </div>
     );
   }
@@ -53,7 +78,7 @@ class Subscriber extends Component {
 
 Subscriber.propTypes = {
   name: PropTypes.string,
-  endpoint: PropTypes.string
+  uri: PropTypes.string
 };
 
 const mapStateToProps = ({ subscribers }) => ({

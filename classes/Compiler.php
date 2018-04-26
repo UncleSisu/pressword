@@ -53,7 +53,7 @@ class WPPW_Compiler {
 
   // Actually hit end point
   // TODO: url input
-  public function postAPI($instructions, $url) {
+  public function postAPI($payload, $url) {
     // localhost test
     // $url = 'http://localhost:3000/wp-hugo';
 
@@ -63,7 +63,7 @@ class WPPW_Compiler {
     $response = wp_remote_post(
       $url,
       array('body' => array(
-        'payload' => json_encode($instructions)
+        'payload' => json_encode($payload)
       ))
     );
     // $response = wp_remote_get( $url );
@@ -78,7 +78,7 @@ class WPPW_Compiler {
     // $press = SITE_ROOT."/wp-content/plugins/pressword/hugo_log.txt";
     // $this->estLogger($press);
     // $this->logger->putLog($frontRes);
-    return "<p id='hugoElement'>$frontRes</p>";
+    return $frontRes;
   }
 
   /**
@@ -92,48 +92,65 @@ class WPPW_Compiler {
   public function triggerAPIs($id, $action, $content) {
     $apis = get_option('pressword');
     foreach ($apis as $api) {
-      $url = $api['endpoint'];
+      $url = $api['uri'];
       if ($this->checkAPIStatus($url)) {
         if (in_array($action, $api['hooks'])) {
           $this->postAPI(
-            $this->createPayload($action, $id, $content, $url),
+            $this->createPayload(
+              $action,
+              $id,
+              $content,
+              $api),
             $url
           );
           // $this->displayNotification($api, $action);
+          // $this->slackTest();
         }
       }
 
     }
   }
 
-  // Determine what kind of build command to pass API
-  public function createPayload($action, $id, $content, $url) {
-    // $endpoint = strrpos($action, 'page') ? 'build-page' : 'build-generic';
-    // 'text' => $command,
+  public function payloadProto($action, $id, $content) {
     return array(
-      'endpoint' => $endpoint,
-      'action' => $action,
-      'id' => $id,
-      'content' => $content,
-      'testing' => true,
+      'wp_action' => $action,
+      'wp_id' => $id,
+      'wp_content' => $content,
+      'wp_testing' => true,
     );
   }
 
-  // Makes output to wordpress look a little better
-  public function hugo_css() {
-    // This makes sure that the positioning is also good for right-to-left languages
-    $x = is_rtl() ? 'left' : 'right';
+  // Determine what kind of build command to pass API
+  public function createPayload($action, $id, $content, $api) {
+    // $endpoint = strrpos($action, 'page') ? 'build-page' : 'build-generic';
+    // 'text' => $command,
 
-    echo "
-    <style type='text/css'>
-    #hugoElement {
-      float: $x;
-      padding-$x: 15px;
-      padding-top: 5px;
-      margin: 0;
-      font-size: 11px;
+    $payload = $this->payloadProto(
+      $action,
+      $id,
+      $content);
+
+    foreach($api['properties'] as $prop) {
+      $payload[$prop['name']] = $prop['value'];
     }
-    </style>
-    ";
+    return $payload;
+  }
+
+  public function slackTest() {
+    $url = 'https://hooks.slack.com/services/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';
+
+    $payload = array(
+      'text' => 'testing testing slack test from wordpress',
+      'channel' => '#yobo',
+      'username' => 'Rhobot',
+      'icon_emoji' => ':rhogiggles:',
+    );
+
+    $response = wp_remote_post(
+      $url,
+      array('body' => array(
+        'payload' => json_encode($payload)
+      ))
+    );
   }
 }

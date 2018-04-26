@@ -1,9 +1,9 @@
 import React from 'react';
-// import Header from './Header'
+import Header from './Header'
 
 export default (props) => (
   <section className="main-container">
-    {/* <Header /> */}
+    <Header />
     { props.children }
   </section>
 );

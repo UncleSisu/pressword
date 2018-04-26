@@ -7,7 +7,7 @@ import {
 import configureStore from './configureStore';
 import rootReducer from './rootReducer'; 
 import rootSaga from './sagas/rootSaga'
-import Pressword from './components/Pressword';
+import Main from './main';
 
 const root = document.querySelector('#pressword-root');
 const store = configureStore({});
@@ -16,7 +16,7 @@ store.runSaga(rootSaga)
 if (root) {
   ReactDOM.render(
     <Provider store={store} key="provider">
-      <Pressword />
+      <Main />
     </Provider>,
     root
   )

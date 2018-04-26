@@ -1,0 +1,21 @@
+import * as types from './constants/actionTypes'
+
+let initState = {
+  routeVisible: 'construct'
+}
+
+const uiReducer = (state = initState, action) => {
+  console.log('check ui reducer', action);
+  const { type, payload } = action
+  switch (type) {
+    case types.ROUTE_VISIBILITY:
+      return {
+        ...state,
+        routeVisible: payload
+      }
+    default:
+      return state
+  }
+}
+
+export default uiReducer;

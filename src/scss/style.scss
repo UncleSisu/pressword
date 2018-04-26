@@ -1,5 +1,6 @@
 // common
 // @import 'common/subscriber';
+// @import 'common/properties';
 // @import 'common/addsub';
 // @import 'common/removesub';
 
@@ -13,9 +14,19 @@
   align-self: flex-end;
 }
 .pressword-api-item {
-  width: 40%;
+  margin: 2%;
+  width: 60%;
   display: flex;
   flex-direction: column;
+  padding: 1%;
+  border: 1px solid #999;
+  box-shadow: inset 1px 1px 5px #999;
+}
+
+.pressword-api-ctas {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
 }
 
 .api-btn {
@@ -26,14 +37,25 @@
   margin: 1em;
   color: white;
   text-decoration: none;
-  flex-grow: 1;
+  // flex-grow: 1;
   text-align: center;
+  &:hover {
+    background-color: #cc5500;
+  }
 }
 
 .container {
   margin: 1% 0;
   display: flex;
   flex-direction: column;
+}
+
+.add-subscriber-container {
+  padding: 1%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #999;
+  box-shadow: inset 1px 1px 5px #999;
 }
 
 .api-item-actions {
@@ -75,4 +97,68 @@
 }
 
 .check-actiongroup {
+}
+
+// property styles
+.pressword-property-group,
+.pressword-property-item-container,
+.pressword-properties,
+.pressword-property-item,
+.pressword-property-inputs-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.pressword-property-item {
+  flex-direction: row;
+  align-items: center;
+  width: auto;
+}
+
+.pressword-property-remove {
+  background: #999;
+  padding: 1vw 3vw;
+  font-size: .9vw;
+  margin-left: 2vw;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  &:hover {
+    background-color: #cc5500;
+  }
+}
+
+// header
+.pressword-header {
+  margin: 0 auto;
+  width: 25vw;
+}
+.pressword-nav {
+}
+.pressword-nav-ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.pressword-nav-link {
+  text-align: center;
+  padding: 1vw 3vw;
+  font-size: .9vw;
+  border-radius: 10px;
+  background-color: #999;
+  color: white;
+  &:hover {
+    background-color: #cc5500;
+  }
+}
+
+.pressword-active-link {
+  background-color: #cc5500;
+}
+
+.pressword-title {
+  font-size: 1.5vw;
+  font-weight: bold;
 }

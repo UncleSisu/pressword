@@ -15,7 +15,5 @@ export const DELETE_API_ERROR = 'DELETE_API_ERROR'
 export const TEST_API_SUCCESS = 'TEST_API_SUCCESS'
 export const TEST_API_ERROR = 'TEST_API_ERROR'
 
-
 // visibility
-// export const FOOTER_VISIBILITY = 'FOOTER_VISIBILITY'
-// export const HEADER_STASIS = 'HEADER_STASIS'
+export const ROUTE_VISIBILITY = 'ROUTE_VISIBILITY'

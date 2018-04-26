@@ -1,28 +1,50 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { setVisibilityAction } from '../uiActions'
 
-export default (props) => {
-  // console.log('see header props change', props.stasis)
-  // <img src={this.props.logo} alt="pressword logo" />
+class Header extends Component {
 
-  // <header id="nav-header">
-  //   <div className="nav-logo"><Link to="/"></Link></div>
-  //   <div className="nav-menu-button">Menu</div>
-  // </header>
-  return (
-    <header className="header">
-      <div className="nav-background">
-        <div id="nav-container">
-          <nav>
-            <ul className="nav-ul">
-              { ['add', 'remove', 'configure'].map((route, idx) => {
-                const upper = route.charAt(0).toUpperCase() + route.slice(1);
-                return <li key={idx} className="nav-link"><Link to={`/${route}`}>{upper}</Link></li>
-              })}
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </header>
-  )
+  constructor(props) {
+    super(props)
+    this.setVisibility = this.setVisibility.bind(this)
+  }
+
+  setVisibility(e, route) {
+    console.log('wtf setVisibility', route, this.props)
+    this.props.changeVisibility(route)
+  }
+
+
+  setNavStatus(route, active) {
+    return active === route ? 'pressword-active-link' : '';
+  }
+
+  render() {
+    return (
+      <header className="pressword-header">
+        <nav className="pressword-nav">
+          <ul className="pressword-nav-ul">
+            { ['construct', 'configure'].map((route, idx) => {
+              let upper = route.charAt(0).toUpperCase() + route.slice(1) + ' Apis';
+              return (
+                <li
+                key={`${route}-${idx}`}
+                className={`pressword-nav-link ${this.setNavStatus(route, this.props.ui.routeVisible)}`}
+                onClick={(e) => this.setVisibility(e, route)}>{upper}</li>
+            )})}
+          </ul>
+        </nav>
+      </header>
+    )
+  }
 }
+
+const mapStateToProps = ({ ui }) => ({
+  ui
+})
+
+const mapDispatchToProps = dispatch => ({
+  changeVisibility: input => dispatch(setVisibilityAction(input))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
