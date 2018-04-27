@@ -23,27 +23,21 @@ class WPPW_Compiler {
    */
   public function __construct(Pressword $app) {
     $this->app = $app;
-    // add_action('admin_head', array($this, 'hugo_css'));
   }
 
-  // This function used to do more...
-  // public function mock_pressword()
-  // {
-  // }
-
   public function displayNotification($api, $action) {
-    // $press = SITE_ROOT."/wp-content/plugins/pressword/hugo_log.txt";
-    // $this->estLogger($press);
-    // $this->logger->putLog($content);
+    // $this->kennyLoggins($api);
 
     ?>
-      <p id='hugoElement'>Subscriber <?php echo $api['name']?> has been notified of <?php $action ?></p>";
+      <p id='notifElement'>Subscriber <?php echo $api['name']?> has been notified of <?php $action ?></p>";
     <?php
   }
 
-  public function estLogger($location) {
+  public function kennyLoggins($content) {
+    $location = SITE_ROOT."/wp-content/plugins/pressword/hugo_log.txt";
     $this->logger = new Logger($location);
     $this->logger->setTimestamp("D M d 'y h.i A");
+    $this->logger->putLog($content);
   }
 
   // Check Hugo API status
@@ -51,22 +45,13 @@ class WPPW_Compiler {
     return wp_remote_get($url);
   }
 
-  // Actually hit end point
-  // TODO: url input
   public function postAPI($payload, $url) {
-    // localhost test
-    // $url = 'http://localhost:3000/wp-hugo';
-
-    // localhost test (vagrant)
-    // $url = 'http://10.0.2.2:3000/wp-hugo';
-
     $response = wp_remote_post(
       $url,
       array('body' => array(
         'payload' => json_encode($payload)
       ))
     );
-    // $response = wp_remote_get( $url );
 
     if (is_wp_error($response)) {
       $frontRes = $response->get_error_message();
@@ -74,17 +59,11 @@ class WPPW_Compiler {
       $frontRes = $response['body'];
     }
 
-    // for logging
-    // $press = SITE_ROOT."/wp-content/plugins/pressword/hugo_log.txt";
-    // $this->estLogger($press);
-    // $this->logger->putLog($frontRes);
+    // $this->kennyLoggins($api);
     return $frontRes;
   }
 
   /**
-   * Builds actions into commands for hugo build process, then
-   * passes instructions to API post function
-   *
    * Called on multitude of hooks.
    *
    * @param int $post_id Post ID.
@@ -107,8 +86,8 @@ class WPPW_Compiler {
           // $this->slackTest();
         }
       }
-
     }
+    // $this->kennyLoggins($api);
   }
 
   public function payloadProto($action, $id, $content) {
@@ -122,9 +101,6 @@ class WPPW_Compiler {
 
   // Determine what kind of build command to pass API
   public function createPayload($action, $id, $content, $api) {
-    // $endpoint = strrpos($action, 'page') ? 'build-page' : 'build-generic';
-    // 'text' => $command,
-
     $payload = $this->payloadProto(
       $action,
       $id,

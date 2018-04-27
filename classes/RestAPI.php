@@ -1,6 +1,8 @@
 <?php
+/* NOT CURRENTLY USED */
+
 /**
- * Compiler object manages tree retrieval, manipulation and publishing
+ * REST_API object manages tree retrieval, manipulation and publishing
  * @package Pressword
  */
 
@@ -17,7 +19,7 @@ class WPPW_RestAPI {
   public $app;
 
   /**
-   * Instantiates a new Compiler object
+   * Instantiates a new REST_API object
    *
    * @param Pressword $app Application container.
    */
@@ -31,6 +33,18 @@ class WPPW_RestAPI {
       'methods' => 'GET',
       'callback' => 'micCheck'
     ));
+    // register_rest_route('wp/v2', '/posts/', array(
+    //   'methods' => 'GET',
+    //   'callback' => 'micCheck'
+    // ));
+    // register_rest_route('wp/v2', '/posts/', array(
+    //   'methods' => 'GET',
+    //   'callback' => 'micCheck'
+    // ));
+    // register_rest_route('wp/v2', '/posts/', array(
+    //   'methods' => 'GET',
+    //   'callback' => 'micCheck'
+    // ));
   }
 
   public function micCheck($data) {
@@ -46,37 +60,11 @@ class WPPW_RestAPI {
     return $posts[0]->post_title;
   }
 
-  public function notify($info) {
-    // $press = SITE_ROOT."/wp-content/plugins/pressword/pressword_log.txt";
-    $this->estLogger(WPHB_LOGGER);
-    $this->logger->putLog($info);
-    echo "<p id='hugo'>$info</p>";
-  }
-
-  public function estLogger ($location) {
+  public function kennyLoggins($content) {
+    $location = SITE_ROOT."/wp-content/plugins/pressword/hugo_log.txt";
     $this->logger = new Logger($location);
     $this->logger->setTimestamp("D M d 'y h.i A");
+    $this->logger->putLog($content);
   }
 
-  // Determine what kind of build command to pass API
-  public function parseAction($action) {
-    $command = $action === 'post_updated_messages' ? 'build-page' : 'build-generic';
-    return array(
-      'text' => $command,
-      'action' => $action,
-    );
-  }
-}
-
-function micCheck($data) {
-  $this->notify('derp');
-  $posts = get_posts( array(
-    'author' => $data['id'],
-  ) );
-
-  if ( empty( $posts ) ) {
-    return null;
-  }
-
-  return $posts[0]->post_title;
 }
