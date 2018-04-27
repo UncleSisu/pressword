@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-class AddProperty extends Component {
+class ConstructProperty extends Component {
   constructor(props) {
     super(props)
     this.state = this.getInitialState();
@@ -19,14 +19,12 @@ class AddProperty extends Component {
   }
 
   handlePropertyInput(event, type) {
-    console.log('see event and type', event.target.value, type);
     let update = {};
     update[`property_${type}`] = event.target.value;
     this.setState(update);
   }
 
   handleSubmit(e) {
-    console.log('hi mom submitting property', e)
     const { property_name, property_value } = this.state;
     const property = {
       name: property_name,
@@ -53,7 +51,9 @@ class AddProperty extends Component {
             value={this.state.property_value}
             onChange={event => this.handlePropertyInput(event, `value`)}/> &nbsp; Enter API property value
         </div>
-        <span className="pressword-property-submit api-btn" onClick={this.handleSubmit}>Add Property</span>
+        <div className="pressword-property-ctas">
+          <span className="pressword-property-submit pressword-btn" onClick={this.handleSubmit}>Add Property</span>
+        </div>
       </div>
     )
   }
@@ -65,4 +65,4 @@ class AddProperty extends Component {
 //   uri: PropTypes.string
 // };
 
-export default AddProperty;
+export default ConstructProperty;

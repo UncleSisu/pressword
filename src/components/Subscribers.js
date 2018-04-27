@@ -2,25 +2,26 @@ import React, { Component } from 'react';
 import Subscriber from './Subscriber';
 
 export default props => {
-
-  const apis = Object.keys(props.apis);
-  return (
-    <div id="pressword-api-display" className="container">
-      <h1>APIs</h1>
-      {
-        apis.length && apis.map((api, id) => {
-          let name = props.apis[api].name;
-          return (
-            <Subscriber
-            key={`${name}-${id}`}
-            name={props.apis[api].name}
-            uri={props.apis[api].uri}
-            properties={props.apis[api].properties}
-            hooks={props.apis[api].hooks}
-            />
-          )
-        })
-      }
-    </div>
-  )
+    const { apis } = props;
+    const apisRegistry = Object.keys(apis);
+    return (
+      <div className="pressword-subscribers-container">
+        <h1>APIs</h1>
+        {
+          apisRegistry.length && apisRegistry.map((api, id) => {
+            let name = apis[api].name;
+            return (
+              <Subscriber
+                key={`${name}-${id}`}
+                api={apis[api]}
+                name={apis[api].name}
+                uri={apis[api].uri}
+                properties={apis[api].properties}
+                hooks={apis[api].hooks}
+              />
+            )
+          })
+        }
+      </div>
+    )
 }

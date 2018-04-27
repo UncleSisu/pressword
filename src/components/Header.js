@@ -3,14 +3,12 @@ import { connect } from 'react-redux'
 import { setVisibilityAction } from '../uiActions'
 
 class Header extends Component {
-
   constructor(props) {
     super(props)
     this.setVisibility = this.setVisibility.bind(this)
   }
 
   setVisibility(e, route) {
-    console.log('wtf setVisibility', route, this.props)
     this.props.changeVisibility(route)
   }
 

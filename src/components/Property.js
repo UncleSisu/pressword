@@ -15,14 +15,7 @@ class Property extends Component {
     const { property } = this.props;
     return (
       <div className="pressword-property-item">
-        <pre>
-          {`
-            {
-              name: ${property.name}
-              value: ${property.value}
-            },
-          `}
-        </pre>
+        <pre>{property}</pre>
         <span className="pressword-property-remove" onClick={(e) => this.handleRemoval(e, property)}>Remove</span>
       </div>
     );

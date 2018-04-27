@@ -1,46 +1,26 @@
+// vars
+@import 'vars';
+
 // common
-// @import 'common/subscriber';
-// @import 'common/properties';
-// @import 'common/addsub';
-// @import 'common/removesub';
+@import 'common/construct';
+@import 'common/properties';
+@import 'common/header';
+@import 'common/configure';
+@import 'common/subscriber';
+@import 'common/checkbox';
 
-#pressword-api-display {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-.pressword-test-btn {
-  width: 20%;
-  align-self: flex-end;
-}
-.pressword-api-item {
-  margin: 2%;
-  width: 60%;
-  display: flex;
-  flex-direction: column;
-  padding: 1%;
-  border: 1px solid #999;
-  box-shadow: inset 1px 1px 5px #999;
-}
-
-.pressword-api-ctas {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-}
-
-.api-btn {
-  background: #999;
+.pressword-btn {
+  background: $grey;
   padding: 1em 2.4em;
-  width: 5vw;
+  // width: 5vw;
   font-size: .9em;
   margin: 1em;
-  color: white;
+  color: $white;
   text-decoration: none;
   // flex-grow: 1;
   text-align: center;
   &:hover {
-    background-color: #cc5500;
+    background-color: $burnt;
   }
 }
 
@@ -50,115 +30,11 @@
   flex-direction: column;
 }
 
-.add-subscriber-container {
-  padding: 1%;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid #999;
-  box-shadow: inset 1px 1px 5px #999;
-}
-
-.api-item-actions {
-  margin: 1vw auto;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  max-width: 25vw;
-}
-
-#hugoElement {
-  float: right;
-  padding-right: 15px;
-  padding-top: 5px;
-  margin: 0;
-  font-size: 11px;
-}
-
-.pressword-api-checkgroup {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 50vw;
-  @media (max-width: 850px) {
-    width: 50vw;
-  }
-  margin: 2%;
-}
-
-.check-typegroup {
-  display: flex;
-  flex-direction: column;
-  margin: 1%;
-  width: 20%;
-  & > .checkbox {
-    font-weight: bold;
-  }
-}
-
-.check-actiongroup {
-}
-
-// property styles
-.pressword-property-group,
-.pressword-property-item-container,
-.pressword-properties,
-.pressword-property-item,
-.pressword-property-inputs-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-
-.pressword-property-item {
-  flex-direction: row;
-  align-items: center;
-  width: auto;
-}
-
-.pressword-property-remove {
-  background: #999;
-  padding: 1vw 3vw;
-  font-size: .9vw;
-  margin-left: 2vw;
-  color: white;
-  text-decoration: none;
-  text-align: center;
-  &:hover {
-    background-color: #cc5500;
-  }
-}
-
-// header
-.pressword-header {
-  margin: 0 auto;
-  width: 25vw;
-}
-.pressword-nav {
-}
-.pressword-nav-ul {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-.pressword-nav-link {
-  text-align: center;
-  padding: 1vw 3vw;
-  font-size: .9vw;
-  border-radius: 10px;
-  background-color: #999;
-  color: white;
-  &:hover {
-    background-color: #cc5500;
-  }
+.pressword-title {
+  font-size: 1.2vw;
+  font-weight: bold;
 }
 
 .pressword-active-link {
-  background-color: #cc5500;
-}
-
-.pressword-title {
-  font-size: 1.5vw;
-  font-weight: bold;
+  background-color: $wp-blue;
 }

@@ -1,0 +1,36 @@
+// property styles
+.pressword-property-group,
+.pressword-property-item-container,
+.pressword-properties,
+.pressword-property-item,
+.pressword-property-inputs-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.pressword-property-item {
+  flex-direction: row;
+  align-items: center;
+  width: auto;
+}
+
+.pressword-property-remove {
+  background: $grey;
+  padding: 1vw 3vw;
+  font-size: .9vw;
+  margin-left: 2vw;
+  color: $white;
+  text-decoration: none;
+  text-align: center;
+  &:hover {
+    background-color: $burnt;
+  }
+}
+.pressword-property-ctas {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}

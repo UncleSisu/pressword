@@ -50,13 +50,15 @@ class CheckboxGroup extends Component {
 
   render() {
     return (
-      <div className="pressword-api-checkgroup">
+      <div className="pressword-checkgroup">
       {types.map(type => (
-          <div key={type} className="check-typegroup">
+          <div key={type} className="pressword-check-typegroup">
             <h2>{type}</h2>
-            <div className="check-actiongroup">
+            <div className="pressword-check-actiongroup">
               {actions.map( action => (
                 <Checkbox
+                  wpHooks={wpHooks}
+                  hooks={this.props.hooks}
                   label={action}
                   type={type}
                   handleCheckboxChange={this.toggleCheckbox}

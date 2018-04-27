@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
-import AddSubscriber from './AddSubscriber';
-// import Subscribers from './Subscribers';
+import ConstructSubscriber from './ConstructSubscriber';
 // import { connect } from 'react-redux'
 // import { getApisAction } from '../subscribersActions'
 
-export default class Configure extends Component {
+export default class Construct extends Component {
   constructor(props) {
     super(props)
     // this.state = props;
   }
 
-  // { this.props.subscribers ? <Subscribers apis={this.props.subscribers}/> : null}
   render() {
     return (
       <div className='container'>
-        <AddSubscriber />
+        <ConstructSubscriber api={null} finishEdit={null}/>
       </div>
     );
   }
@@ -28,4 +26,4 @@ export default class Configure extends Component {
 //   getApis: () => dispatch(getApisAction())
 // })
 //
-// export default connect(mapStateToProps, mapDispatchToProps)(Pressword)
+// export default connect(mapStateToProps, mapDispatchToProps)(Construct)

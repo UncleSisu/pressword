@@ -22,6 +22,19 @@ class Checkbox extends Component {
     handleCheckboxChange(type, label);
   }
 
+  componentDidMount() {
+    if(this.props.hooks) {
+      this.fillBoxesOnEdit();
+    }
+  }
+
+  fillBoxesOnEdit() {
+    const { wpHooks, hooks, type, label } = this.props;
+    if (wpHooks[type][label].filter(hook => hooks.indexOf(hook) > -1).length) {
+      this.toggleCheckboxChange()
+    }
+  }
+
   render() {
     const { label } = this.props;
     const { isChecked } = this.state;

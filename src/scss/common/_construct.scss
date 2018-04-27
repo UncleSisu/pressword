@@ -1,0 +1,28 @@
+// construct
+.pressword-construct-container {
+  padding: 1%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $grey;
+  box-shadow: inset 1px 1px 5px $grey;
+}
+
+.pressword-construct-ctas {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.pressword-construct-exit {
+  background-color: $wp-red;
+  align-self: flex-end;
+  border-radius: 50%; /* one half of ( (border * 2) + height + padding ) */
+  box-shadow: 1px 1px 1px black;
+  color: white;
+  font: bold 18px/14px Helvetica, Verdana, Tahoma;
+  height: 20px; 
+  width: 20px; 
+  padding: 5px 3px 0 4px;
+  text-align: center;
+}
+

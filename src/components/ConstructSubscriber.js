@@ -3,12 +3,12 @@ import { connect } from 'react-redux'
 import { postApiAction } from '../subscribersActions'
 import CheckboxGroup from './CheckboxGroup'
 import Properties from './Properties'
-import AddProperty from './AddProperty'
+import ConstructProperty from './ConstructProperty'
 
-class AddSubscriber extends Component {
+class ConstructSubscriber extends Component {
   constructor(props) {
     super(props)
-    this.state = this.getInitialState();
+    this.state = this.getInitialState(props.api);
 
     // bind events
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -17,8 +17,8 @@ class AddSubscriber extends Component {
     this.submitHooks = this.submitHooks.bind(this);
   }
 
-  getInitialState() {
-    return {
+  getInitialState(api) {
+    return api || {
       name: "",
       uri: "",
       properties: [],
@@ -43,7 +43,12 @@ class AddSubscriber extends Component {
       hooks,
       properties
     })
-    this.resetState();
+
+    if (this.props.finishEdit) {
+      this.props.finishEdit(e);
+    } else {
+      this.resetState();
+    }
   }
 
   handleApiInput(event, type) {
@@ -78,7 +83,14 @@ class AddSubscriber extends Component {
 
   render() {
     return (
-      <div className='add-subscriber-container'>
+      <div className="pressword-construct-container">
+        {
+          this.props.finishEdit ? 
+          (<div className="pressword-construct-exit" onClick={this.props.finishEdit}>
+            <span>X</span>
+          </div>)
+           : null
+        }
         <div className="pressword-new-api-container form-inline">
           <input
             value={this.state.name}
@@ -93,17 +105,17 @@ class AddSubscriber extends Component {
             value={this.state.uri}
             onChange={event => this.handleApiInput(event, `uri`)}/> &nbsp; Enter API url for PressWord broadcasting
         </div>
-        <CheckboxGroup submitHooks={this.submitHooks}/>
+        <CheckboxGroup submitHooks={this.submitHooks} hooks={this.props.api ? this.props.api.hooks : null}/>
         <div className="pressword-property-group">
           <h1>Properties</h1>
-          <AddProperty submitProperty={this.handlePropertySubmit}/>
+          <ConstructProperty submitProperty={this.handlePropertySubmit}/>
           <Properties
             properties={this.state.properties}
             removeProperty={this.handlePropertyRemoval}
           />
         </div>
-        <div className="pressword-api-ctas">
-          <span className="pressword-api-submit api-btn" onClick={this.handleSubmit}>Add API</span>
+        <div className="pressword-construct-ctas">
+          <span className="pressword-api-submit pressword-btn" onClick={this.handleSubmit}>{this.props.finishEdit ? 'Save API' : 'Add API'}</span>
         </div>
       </div>
     );
@@ -118,4 +130,4 @@ const mapDispatchToProps = dispatch => ({
   postApi: input => dispatch(postApiAction(input))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddSubscriber);
+export default connect(mapStateToProps, mapDispatchToProps)(ConstructSubscriber);
