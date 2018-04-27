@@ -11,16 +11,24 @@
 
 .pressword-btn {
   background: $grey;
-  padding: 1em 2.4em;
-  // width: 5vw;
-  font-size: .9em;
-  margin: 1em;
+  padding: 1vw 4vw;
+  font-size: .9vw;
+  margin: 1vw;
   color: $white;
   text-decoration: none;
   // flex-grow: 1;
   text-align: center;
   &:hover {
     background-color: $burnt;
+  }
+
+  @media (max-width: $mid-break) {
+    padding: 2vw 6vw;
+    font-size: 1.8vw;
+  }
+
+  @media (max-width: $mobile-break) {
+    font-size: 3vw;
   }
 }
 
@@ -33,6 +41,9 @@
 .pressword-title {
   font-size: 1.2vw;
   font-weight: bold;
+  @media (max-width: $mid-break) {
+    font-size: 3vw;
+  }
 }
 
 .pressword-active-link {

@@ -49,7 +49,7 @@ class ConstructProperty extends Component {
             type="text"
             className="pressword-property-value-input"
             value={this.state.property_value}
-            onChange={event => this.handlePropertyInput(event, `value`)}/> &nbsp; Enter API property value
+            onChange={event => this.handlePropertyInput(event, `value`)}/> &nbsp; Enter property value
         </div>
         <div className="pressword-property-ctas">
           <span className="pressword-property-submit pressword-btn" onClick={this.handleSubmit}>Add Property</span>

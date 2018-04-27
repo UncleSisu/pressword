@@ -46,14 +46,7 @@ class Subscriber extends Component {
             <p className="pressword-title">Properties:</p>
             { Array.isArray(properties) ? properties.map(prop => {
               return (
-                <pre>
-                  {`
-                  {
-                    name: ${prop.name},
-                    value: ${prop.value}
-                  }
-                  `}
-                </pre>
+                <pre>{` {\n name: ${prop.name},\n value: ${prop.value}\n }`}</pre>
               )
             }) : 'No properties configured'}
           </div>
@@ -61,12 +54,7 @@ class Subscriber extends Component {
           <div className="pressword-subscriber-hooks">
             <p className="pressword-title">Hooks:</p>
             { hooks && hooks.length ?
-              <pre>
-                {`
-                  ${hooks}
-                `}
-
-              </pre>
+              <pre>{`${hooks}`}</pre>
             : 'No hooks configured'}
           </div>
         </div>)}

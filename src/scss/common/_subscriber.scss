@@ -13,12 +13,14 @@
 
 .pressword-subscriber {
   margin: 2%;
-  width: 60%;
   display: flex;
   flex-direction: column;
   padding: 1%;
   border: 1px solid $grey;
   background-color: $white;
+  @media (min-width: $mid-break) {
+    width: 60%
+  }
   // box-shadow: inset 1px 1px 5px #999;
 }
 

@@ -96,14 +96,14 @@ class ConstructSubscriber extends Component {
             value={this.state.name}
             className="pressword-new-api-alias-input form-inline"
             type="text"
-            onChange={event => this.handleApiInput(event, `name`)} /> &nbsp; Add API name
+            onChange={event => this.handleApiInput(event, `name`)} /> &nbsp; Enter API name
         </div>
         <div className="pressword-new-api-uri-container form-inline">
           <input
             type="text"
             className="pressword-new-api-uri-input"
             value={this.state.uri}
-            onChange={event => this.handleApiInput(event, `uri`)}/> &nbsp; Enter API url for PressWord broadcasting
+            onChange={event => this.handleApiInput(event, `uri`)}/> &nbsp; Enter API uri
         </div>
         <CheckboxGroup submitHooks={this.submitHooks} hooks={this.props.api ? this.props.api.hooks : null}/>
         <div className="pressword-property-group">

@@ -4,8 +4,11 @@
   flex-direction: row;
   justify-content: space-between;
   width: 50vw;
-  @media (max-width: 850px) {
-    width: 50vw;
+  @media (max-width: $mid-break) {
+    width: 100%;
+  }
+  @media (max-width: $mobile-break) {
+    flex-direction: column;
   }
   margin: 2%;
 }
@@ -17,5 +20,18 @@
   width: 20%;
   & > .checkbox {
     font-weight: bold;
+  }
+  @media (max-width: $mobile-break) {
+    flex-direction: row;
+
+    .pressword-check-actiongroup {
+      margin: 0 10% 0 10%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      & > * {
+        margin: 0 5% 0 5%;
+      }
+    }
   }
 }
