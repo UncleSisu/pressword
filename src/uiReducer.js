@@ -1,7 +1,10 @@
 import * as types from './constants/actionTypes'
 
+// let initState = {
+//   routeVisible: 'construct'
+// }
 let initState = {
-  routeVisible: 'construct'
+  routeVisible: null
 }
 
 const uiReducer = (state = initState, action) => {

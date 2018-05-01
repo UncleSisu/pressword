@@ -4,31 +4,24 @@ import PropTypes from 'prop-types';
 class Checkbox extends Component {
   constructor(props){
     super(props)
-    this.state = {
-      isChecked: false,
-    }
     this.toggleCheckboxChange = this.toggleCheckboxChange.bind(this);
-  }
-
-  toggleCheckboxChange() {
-    console.log('check change', this)
-    const { handleCheckboxChange, label, type } = this.props;
-
-
-    this.setState(({ isChecked }) => ({
-        isChecked: !isChecked,
-      }));
-
-    handleCheckboxChange(type, label);
   }
 
   componentDidMount() {
     if(this.props.hooks) {
-      this.fillBoxesOnEdit();
+      this.fillBoxesOnTrigger();
     }
   }
 
-  fillBoxesOnEdit() {
+  toggleCheckboxChange() {
+    const { handleCheckboxChange, label, type } = this.props;
+
+    this.props.setBoxState(type, label)
+
+    handleCheckboxChange(type, label);
+  }
+
+  fillBoxesOnTrigger() {
     const { wpHooks, hooks, type, label } = this.props;
     if (wpHooks[type][label].filter(hook => hooks.indexOf(hook) > -1).length) {
       this.toggleCheckboxChange()
@@ -36,8 +29,7 @@ class Checkbox extends Component {
   }
 
   render() {
-    const { label } = this.props;
-    const { isChecked } = this.state;
+    const { label, checked } = this.props;
 
     return (
       <div className="checkbox">
@@ -45,7 +37,7 @@ class Checkbox extends Component {
           <input
             type="checkbox"
             value={label}
-            checked={isChecked}
+            checked={checked}
             onChange={this.toggleCheckboxChange}
           />
           {label}

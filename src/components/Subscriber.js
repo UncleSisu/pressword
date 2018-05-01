@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ConstructSubscriber from './ConstructSubscriber'
+import Properties from './Properties'
 import { connect } from 'react-redux'
 import { deleteApiAction } from '../subscribersActions'
 import PropTypes from 'prop-types';
@@ -44,18 +45,26 @@ class Subscriber extends Component {
           <p><span className="pressword-title">URI:</span> {uri}</p>
           <div className="pressword-subscriber-props">
             <p className="pressword-title">Properties:</p>
-            { Array.isArray(properties) ? properties.map(prop => {
-              return (
-                <pre>{` {\n name: ${prop.name},\n value: ${prop.value}\n }`}</pre>
-              )
-            }) : 'No properties configured'}
+            { Array.isArray(properties) ?
+              <Properties
+                properties={properties}
+                removeProperty={null}
+                configView={true}
+              />
+             : 'No properties configured'}
           </div>
 
           <div className="pressword-subscriber-hooks">
             <p className="pressword-title">Hooks:</p>
+            { hooks && hooks.length && <pre> [</pre> }
             { hooks && hooks.length ?
-              <pre>{`${hooks}`}</pre>
+              hooks.map(hook => {
+                return (
+                  <pre key={hook}>{`\t${hook},`}</pre>
+                )
+              })
             : 'No hooks configured'}
+            { hooks && hooks.length && <pre> ]</pre> }
           </div>
         </div>)}
         { 

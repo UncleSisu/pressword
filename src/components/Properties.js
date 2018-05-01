@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import Property from './Property';
 
-export default ({ properties, removeProperty }) => {
+export default ({ properties, removeProperty, configView }) => {
   return (
     <div className="pressword-properties">
+    {properties && properties.length ? <pre> [</pre> : null}
       {
-        properties.length ? properties.map((prop, id) => {
+        properties && properties.length ? properties.map((prop, id) => {
           return (
-            <Property key={id} property={prop} removeProperty={removeProperty}/>
+            <Property key={id} property={prop} removeProperty={removeProperty} configView={configView}/>
           )
         }) : null
       }
+    {properties && properties.length ? <pre> ]</pre> : null}
     </div>
   )
 }

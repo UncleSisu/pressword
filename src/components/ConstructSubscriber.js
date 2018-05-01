@@ -18,24 +18,23 @@ class ConstructSubscriber extends Component {
   }
 
   getInitialState(api) {
-    return api || {
+    let state = api || {
       name: "",
       uri: "",
       properties: [],
       hooks: []
     }
+
+    state.properties = Array.isArray(state.properties) ? state.properties : [];
+    state.hooks = Array.isArray(state.hooks) ? state.hooks : [];
+    return state;
   }
 
   resetState() {
     this.setState(this.getInitialState());
   }
 
-  componentDidMount() {
-    // console.log('AddSubscriber has mounted');
-  }
-
   handleSubmit(e) {
-    console.log('check submit', this.state);
     const { name, uri, hooks, properties } = this.state;
     this.props.postApi({
       name,
@@ -46,13 +45,11 @@ class ConstructSubscriber extends Component {
 
     if (this.props.finishEdit) {
       this.props.finishEdit(e);
-    } else {
-      this.resetState();
     }
+    this.resetState();
   }
 
   handleApiInput(event, type) {
-    console.log('see event and type', event.target.value, type);
     let update = {};
     update[type] = event.target.value;
     this.setState(update);
@@ -60,7 +57,6 @@ class ConstructSubscriber extends Component {
 
   // Properties
   handlePropertySubmit(property) {
-    console.log('hi mom submitting property', property)
     const { properties } = this.state;
     properties.push(property);
     this.setState({
@@ -69,7 +65,6 @@ class ConstructSubscriber extends Component {
   }
 
   handlePropertyRemoval(property) {
-    console.log('hi mom removing property', property)
     const properties = this.state.properties.filter(prop => {
       return prop.name !== property.name;
     })
@@ -78,7 +73,7 @@ class ConstructSubscriber extends Component {
 
   // Checkbox/Hook submission
   submitHooks(hooks) {
-    this.setState({ hooks }, () => console.log('recent checks in state', this.state.hooks));
+    this.setState({ hooks });
   }
 
   render() {
@@ -105,13 +100,14 @@ class ConstructSubscriber extends Component {
             value={this.state.uri}
             onChange={event => this.handleApiInput(event, `uri`)}/> &nbsp; Enter API uri
         </div>
-        <CheckboxGroup submitHooks={this.submitHooks} hooks={this.props.api ? this.props.api.hooks : null}/>
+        <CheckboxGroup submitHooks={this.submitHooks} hooks={this.state.hooks}/>
         <div className="pressword-property-group">
           <h1>Properties</h1>
           <ConstructProperty submitProperty={this.handlePropertySubmit}/>
           <Properties
             properties={this.state.properties}
             removeProperty={this.handlePropertyRemoval}
+            configView={false}
           />
         </div>
         <div className="pressword-construct-ctas">

@@ -22,22 +22,26 @@ class Main extends Component {
     this.props.getApis();
   }
 
-  operator(route) {
-    const { subscribers } = this.state;
-    switch(route) {
-      case 'construct':
-        return <Construct subscribers={subscribers}/>;
-      case 'configure':
-        return <Configure subscribers={subscribers}/>;
-      default:
-        return <Construct subscribers={subscribers}/>;
-    }
-  }
+  // operator(route) {
+  //   const { subscribers } = this.state;
+  //   switch(route) {
+  //     case 'construct':
+  //       return <Construct subscribers={subscribers}/>;
+  //     case 'configure':
+  //       return <Configure subscribers={subscribers}/>;
+  //     default:
+  //       return <Construct subscribers={subscribers}/>;
+  //   }
+  // }
+
   render() {
+    const { subscribers } = this.state;
     return (
       <section className="main-container">
-        <Header />
-        {this.operator(this.props.ui.routeVisible)}
+        {/* <Header /> */}
+        {/* this.operator(this.props.ui.routeVisible) */}
+        <Construct />
+        <Configure subscribers={subscribers}/>
       </section>
     )
   }

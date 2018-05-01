@@ -12,11 +12,13 @@ class Property extends Component {
   }
 
   render() {
-    const { property } = this.props;
+    const { property, configView } = this.props;
     return (
       <div className="pressword-property-item">
-      <pre>{` {\n name: ${property.name},\n value: ${property.value}\n }`}</pre>
-        <span className="pressword-property-remove" onClick={(e) => this.handleRemoval(e, property)}>Remove</span>
+      <pre>{`\t{\n\t name: ${property.name},\n\t value: ${property.value}\n\t},`}</pre>
+      {!configView ?
+        (<span className="pressword-property-remove" onClick={(e) => this.handleRemoval(e, property)}>Remove</span>)
+        : null}
       </div>
     );
   }

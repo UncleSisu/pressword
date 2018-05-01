@@ -10,19 +10,38 @@ class CheckboxGroup extends Component {
     super(props)
     this.state = this.getInitialState();
     this.toggleCheckbox = this.toggleCheckbox.bind(this);
+    this.setBoxState = this.setBoxState.bind(this);
   }
 
   getInitialState() {
-    return {}
+    return {
+      boxes: this.initialBoxes()
+    };
   }
 
   resetState() {
     this.setState(this.getInitialState());
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (this.props.hooks.length && !nextProps.hooks.length) {
+      this.resetState();
+    }
+  }
+
   componentWillMount() {
     this.selectedCheckboxes = types.reduce((acc, curr) => {
       acc[curr] = new Set()
+      return acc;
+    }, {})
+  }
+
+  initialBoxes() {
+    return types.reduce((acc, curr) => {
+      acc[curr] = actions.reduce((ac, cur) => {
+        ac[cur] = false;
+        return ac;
+      }, {})
       return acc;
     }, {})
   }
@@ -48,6 +67,14 @@ class CheckboxGroup extends Component {
     this.props.submitHooks(hooks);
   }
 
+  setBoxState(type, label) {
+    let {boxes} = this.state;
+    let checked = boxes[type][label];
+    boxes[type][label] = !checked;
+
+    this.setState({boxes});
+  }
+
   render() {
     return (
       <div className="pressword-checkgroup">
@@ -61,8 +88,10 @@ class CheckboxGroup extends Component {
                   hooks={this.props.hooks}
                   label={action}
                   type={type}
+                  checked={this.state.boxes[type][action]}
+                  setBoxState={this.setBoxState}
                   handleCheckboxChange={this.toggleCheckbox}
-                  key={action}
+                  key={`checkbox-${action}-${type}`}
                 />
               ))}
             </div>
