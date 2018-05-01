@@ -12,6 +12,7 @@ export default class Configure extends Component {
   render() {
     return (
       <div className='container'>
+        <h1>APIs</h1>
         <Subscribers apis={this.props.subscribers}/>
       </div>
     );

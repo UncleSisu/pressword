@@ -6,7 +6,6 @@ export default props => {
     const apisRegistry = Object.keys(apis);
     return (
       <div className="pressword-subscribers-container">
-        <h1>APIs</h1>
         {
           apisRegistry.length && apisRegistry.map((api, id) => {
             let name = apis[api].name;
