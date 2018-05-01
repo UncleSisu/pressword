@@ -1,4 +1,4 @@
-import * as types from './constants/actionTypes'
+import * as types from '../../constants/actionTypes'
 
 // Returns action type and PUT_FORM
 export const postApiAction = payload => ({

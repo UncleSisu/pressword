@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ConstructSubscriber from './ConstructSubscriber'
 import Properties from './Properties'
 import { connect } from 'react-redux'
-import { deleteApiAction } from '../subscribersActions'
+import { deleteApiAction } from '../store/actions/subscribersActions'
 import PropTypes from 'prop-types';
 
 

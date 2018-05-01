@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { setVisibilityAction } from '../uiActions'
+import { setVisibilityAction } from '../store/actions/uiActions'
 
 class Header extends Component {
   constructor(props) {

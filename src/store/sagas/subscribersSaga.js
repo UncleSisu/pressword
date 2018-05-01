@@ -1,7 +1,7 @@
 import 'regenerator-runtime/runtime'
 import { put, call } from 'redux-saga/effects'
-import { postApi, getApis, deleteApi } from './api'
-import * as types from './constants/actionTypes'
+import { postApi, getApis, deleteApi } from '../../api'
+import * as types from '../../constants/actionTypes'
 
 // and then instructing the saga middleware on the next line of action,
 // for success or failure

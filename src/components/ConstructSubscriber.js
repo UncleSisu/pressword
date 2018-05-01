@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { postApiAction } from '../subscribersActions'
+import { postApiAction } from '../store/actions/subscribersActions'
 import CheckboxGroup from './CheckboxGroup'
 import Properties from './Properties'
 import ConstructProperty from './ConstructProperty'

@@ -1,7 +1,7 @@
 import 'regenerator-runtime/runtime'
 import { takeLatest, take } from 'redux-saga/effects'
-import { postApiSaga, getApisSaga, deleteApiSaga } from '../subscribersSaga'
-import * as types from '../constants/actionTypes'
+import { postApiSaga, getApisSaga, deleteApiSaga } from './subscribersSaga'
+import * as types from '../../constants/actionTypes'
 
 export function* watchApiPost () {
   console.log('watchApiPost triggered')

@@ -1,4 +1,4 @@
-import * as types from './constants/actionTypes'
+import * as types from '../../constants/actionTypes'
 
 const subscribersReducer = (state = { subscribers: {} }, action) => {
   const { type, status } = action

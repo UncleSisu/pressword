@@ -3,9 +3,7 @@ import { connect } from 'react-redux'
 import Header from './components/Header'
 import Configure from './components/Configure';
 import Construct from './components/Construct';
-import { getApisAction } from './subscribersActions'
-// import Apis from './components/Pressword';
-// import Services from './components/Pressword';
+import { getApisAction } from './store/actions/subscribersActions'
 
 class Main extends Component {
   constructor(props) {
