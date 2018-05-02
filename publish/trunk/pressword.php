@@ -1,9 +1,5 @@
 <?php
 /**
- * @package PressWord
- * @version 0.1
- */
-/*
 Plugin Name: PressWord
 Plugin URI: http://wordpress.org/plugins/pressword/
 Description: Utilize WordPress as an event API, pushing out data on selected events to specified endpoints.
@@ -12,6 +8,12 @@ Version: 0.1
 Author URI: https://sisumedia.com/
 License: MIT
 */
+
+/**
+ * @package PressWord
+ * @version 0.1
+ */
+/*
 
 /**
  * @package WPPW
