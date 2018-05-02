@@ -40,7 +40,8 @@ Answer to foo bar dilemma.
 == Changelog ==
 
 = 0.1 =
-* Release!.
+* Beta Release!.
+* Use with caution! Security features not implemented yet!
 
 == Upgrade Notice ==
 
