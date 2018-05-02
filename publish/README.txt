@@ -20,9 +20,13 @@ Pressword enables an API interfaces between WordPress and the specificed API to 
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= What's the name of this plugin? =
 
-An answer to that question.
+The name of the plugin is the one displayed on this page.
+
+= Do you love kittens? =
+
+Of course.
 
 = What about foo bar? =
 
