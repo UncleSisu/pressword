@@ -1,7 +1,8 @@
 === Pressword ===
-Contributors: blakesisu, unclesisu, stevenwaller
+Contributors: blakesisu, stevewaller
 Donate link: http://sisumedia.com/
 Tags: pressword, event, api
+Requires PHP: 5.2.4
 Requires at least: 0.1
 Tested up to: 0.1
 Stable tag: 0.1
@@ -40,3 +41,8 @@ Answer to foo bar dilemma.
 
 = 0.1 =
 * Release!.
+
+== Upgrade Notice ==
+
+= 0.1 =
+First release!
