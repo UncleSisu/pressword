@@ -33,12 +33,12 @@ class WPPW_Compiler {
     <?php
   }
 
-  public function kennyLoggins($content) {
-    $location = SITE_ROOT."/wp-content/plugins/pressword/hugo_log.txt";
-    $this->logger = new Logger($location);
-    $this->logger->setTimestamp("D M d 'y h.i A");
-    $this->logger->putLog($content);
-  }
+  // public function kennyLoggins($content) {
+  //   $location = SITE_ROOT."/wp-content/plugins/pressword/hugo_log.txt";
+  //   $this->logger = new Logger($location);
+  //   $this->logger->setTimestamp("D M d 'y h.i A");
+  //   $this->logger->putLog($content);
+  // }
 
   // Check Hugo API status
   public function checkAPIStatus($url) {
@@ -112,21 +112,21 @@ class WPPW_Compiler {
     return $payload;
   }
 
-  public function slackTest() {
-    $url = 'https://hooks.slack.com/services/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';
-
-    $payload = array(
-      'text' => 'testing testing slack test from wordpress',
-      'channel' => '#yobo',
-      'username' => 'Rhobot',
-      'icon_emoji' => ':rhogiggles:',
-    );
-
-    $response = wp_remote_post(
-      $url,
-      array('body' => array(
-        'payload' => json_encode($payload)
-      ))
-    );
-  }
+  // public function slackTest() {
+  //   $url = 'https://hooks.slack.com/services/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';
+  //
+  //   $payload = array(
+  //     'text' => 'testing testing slack test from wordpress',
+  //     'channel' => '#yobo',
+  //     'username' => 'Rhobot',
+  //     'icon_emoji' => ':rhogiggles:',
+  //   );
+  //
+  //   $response = wp_remote_post(
+  //     $url,
+  //     array('body' => array(
+  //       'payload' => json_encode($payload)
+  //     ))
+  //   );
+  // }
 }

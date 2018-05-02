@@ -60,7 +60,7 @@ class Pressword {
    */
   public $compiler;
   public $admin;
-  public $logger;
+  // public $logger;
   public $sensors;
   public $action = 'nope';
 
@@ -88,7 +88,7 @@ class Pressword {
 
     require_once(__DIR__ . '/setup-hooks.php');
     require_once( 'classes/Autoloader.php' );
-    require_once( 'logger.php' );
+    // require_once( 'logger.php' );
     $this->autoloader = new WPPW_Autoloader( $this );
     $this->autoloader->Register( self::PLG_CLS_PRFX, $this->GetBaseDir() . 'classes' . DIRECTORY_SEPARATOR );
 

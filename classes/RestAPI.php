@@ -60,11 +60,11 @@ class WPPW_RestAPI {
     return $posts[0]->post_title;
   }
 
-  public function kennyLoggins($content) {
-    $location = SITE_ROOT."/wp-content/plugins/pressword/hugo_log.txt";
-    $this->logger = new Logger($location);
-    $this->logger->setTimestamp("D M d 'y h.i A");
-    $this->logger->putLog($content);
-  }
+  // public function kennyLoggins($content) {
+  //   $location = SITE_ROOT."/wp-content/plugins/pressword/hugo_log.txt";
+  //   $this->logger = new Logger($location);
+  //   $this->logger->setTimestamp("D M d 'y h.i A");
+  //   $this->logger->putLog($content);
+  // }
 
 }
