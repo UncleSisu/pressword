@@ -1,11 +1,56 @@
 // configure
 .pressword-config-head {
   width: 350px;
+}
+
+.pressword-config-head-options,
+.pressword-config-head-search,
+.pressword-config-search-ctas {
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.pressword-config-head-options {
   justify-content: space-evenly;
   & > * > span:hover {
     color:#cc5500;
+  }
+}
+
+.pressword-config-head-search {
+  & * {
+    margin-right: 1em;
+  }
+}
+
+.pressword-config-search-ctas {
+  // justify-content: space-between;
+}
+
+.pressword-config-search-exit,
+.pressword-config-search-submit {
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 20px;;
+  border-radius: 50%;
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 0 3px gray;
+}
+
+.pressword-config-search-submit {
+  background: #16da16;
+  &:hover {
+    background:#3de63d;
+  }
+}
+
+.pressword-config-search-exit {
+  background: #ff0000;
+  &:hover {
+    background:#f34343;
   }
 }

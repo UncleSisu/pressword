@@ -23,11 +23,11 @@
   display: flex;
   flex-direction: column;
   padding: 1%;
-  border: 1px solid $grey;
+  // border: 1px solid $grey;
   background-color: $white;
-  @media (min-width: $mid-break) {
-    width: 60%
-  }
+  // @media (min-width: $mid-break) {
+  //   width: 60%
+  // }
   // box-shadow: inset 1px 1px 5px #999;
 }
 .pressword-inline-api {
@@ -67,4 +67,21 @@
   color: $wp-blue;
   font-weight: bold;
   font-size: 16px;
+  margin-left: .5em;
+}
+
+.pressword-api-display-exit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $wp-blue;
+  height: 50px;
+  width: 140px;
+  font-size: 16px;
+  color: $white;
+  text-decoration: none;
+  text-align: center;
+  &:hover {
+    background-color: $burnt;
+  }
 }

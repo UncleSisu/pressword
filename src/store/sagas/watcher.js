@@ -4,16 +4,13 @@ import { postApiSaga, getApisSaga, deleteApiSaga } from './apisSaga'
 import * as types from '../../constants/actionTypes'
 
 export function* watchApiPost () {
-  // console.log('watchApiPost triggered')
   yield takeLatest(types.POST_API, postApiSaga)
 }
 
 export function* watchApiGet () {
-  // console.log('watchApiGet triggered')
   yield takeLatest(types.GET_APIS, getApisSaga)
 }
 
 export function* watchApiDelete () {
-  // console.log('watchApiDelete triggered')
   yield takeLatest(types.DELETE_API, deleteApiSaga)
 }

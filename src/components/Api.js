@@ -21,7 +21,8 @@ class Api extends Component {
     return {
       edit: false,
       show: false,
-      ctas: false
+      ctas: false,
+      // ischecked: false
     }
   }
 
@@ -73,7 +74,8 @@ class Api extends Component {
         </div>
 
       { this.state.edit ?
-        <ConstructApi api={api} finishEdit={this.handleChange} /> : (
+        <ConstructApi api={api} finishEdit={this.handleChange} />
+         : (
          this.state.show &&
           <div className="pressword-api">
             <p><span className="pressword-title">Name:</span> {name}</p>
@@ -101,13 +103,16 @@ class Api extends Component {
               : 'No hooks configured'}
               { hooks && hooks.length && <pre> ]</pre> }
             </div>
+          <div className="pressword-api-display-exit" onClick={this.showApi}>
+            Exit Display
+          </div>
            </div>)}
-      {this.state.ctas && <div className="pressword-api-ctas">
+      {this.state.ctas && !this.state.show && <div className="pressword-api-ctas">
           <span className="pressword-cta-btn" onClick={this.showApi}>Display</span>
           <span>|</span>
           <span className="pressword-cta-btn" onClick={this.handleChange}>Edit</span>
           <span>|</span>
-          <span className="pressword-cta-btn" onClick={this.handleActivation}>{active ? 'Deactivate' : 'Activate'}</span>
+          <span className="pressword-cta-btn" onClick={this.handleActivation}>{active === 'true' ? 'Deactivate' : 'Activate'}</span>
           <span>|</span>
           <span className="pressword-cta-btn" onClick={this.handleDelete}>Delete</span>
         </div>}

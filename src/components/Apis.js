@@ -4,7 +4,6 @@ import Api from './Api';
 export default props => {
     const { apis, handleUpdate } = props;
     const apisRegistry = Object.keys(apis);
-    console.log('wtf where my apis', props)
     return (
       <div className="pressword-apis-container">
         {
