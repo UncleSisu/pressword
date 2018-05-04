@@ -1,1 +1,11 @@
 // configure
+.pressword-config-head {
+  width: 350px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  & > * > span:hover {
+    color:#cc5500;
+  }
+}

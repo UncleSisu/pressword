@@ -73,7 +73,7 @@ class WPPW_Compiler {
     foreach ($apis as $api) {
       $url = $api['uri'];
       if ($this->checkAPIStatus($url)) {
-        if (in_array($action, $api['hooks'])) {
+        if (in_array($action, $api['hooks']) && $api['active']) {
           $this->postAPI(
             $this->createPayload(
               $action,

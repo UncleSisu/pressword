@@ -25,4 +25,25 @@
   padding: 5px 3px 0 4px;
   text-align: center;
 }
+.pressword-construct-head {
+  width: 275px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
 
+.pressword-round-button {
+  width: 25px;
+  height: 25px;
+  font-size: 25px;
+  line-height: 25px;;
+  border-radius: 50%;
+  color: #fff;
+  text-align: center;
+  background: #4679BD; 
+  box-shadow: 0 0 3px gray;
+  &:hover {
+    background:#cc5500;
+  }
+}

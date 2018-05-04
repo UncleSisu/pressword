@@ -15,16 +15,12 @@ export const deleteApi = (url, payload) => {
   return postRequest(url, 'delete_api', handleData, payload);
 }
 
-export const testApi = (url, payload) => {
-  // console.log('testApi triggered?', url, input)
-  return postRequest(url, 'test_pressword_api', handleData, payload);
-}
-
 function handleData(data) {
-  // console.log('handleData response return', data.apis);
-  return {
-    subscribers: data.apis
-  }
+  console.log('handleData response return', data.apis);
+  return data.apis;
+  // return {
+  //   apis: data.apis
+  // }
 }
 
 function postRequest(url, action, handler, payload = {}) {

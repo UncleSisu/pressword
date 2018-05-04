@@ -11,11 +11,6 @@ export const deleteApiAction = payload => ({
   payload,
 })
 
-export const testApiAction = payload => ({
-  type: types.TEST_API,
-  payload,
-})
-
 export const getApisAction = () => ({
   type: types.GET_APIS
 })

@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { postApiAction } from '../store/actions/subscribersActions'
+import { postApiAction } from '../store/actions/apisActions'
 import CheckboxGroup from './CheckboxGroup'
 import Properties from './Properties'
 import ConstructProperty from './ConstructProperty'
 
-class ConstructSubscriber extends Component {
+class ConstructApi extends Component {
   constructor(props) {
     super(props)
     this.state = this.getInitialState(props.api);
@@ -22,7 +22,8 @@ class ConstructSubscriber extends Component {
       name: "",
       uri: "",
       properties: [],
-      hooks: []
+      hooks: [],
+      active: true
     }
 
     state.properties = Array.isArray(state.properties) ? state.properties : [];
@@ -35,12 +36,13 @@ class ConstructSubscriber extends Component {
   }
 
   handleSubmit(e) {
-    const { name, uri, hooks, properties } = this.state;
+    const { name, uri, hooks, properties, active } = this.state;
     this.props.postApi({
       name,
       uri,
       hooks,
-      properties
+      properties,
+      active
     })
 
     if (this.props.finishEdit) {
@@ -118,12 +120,12 @@ class ConstructSubscriber extends Component {
   }
 }
 
-const mapStateToProps = ({ subscribers }) => ({
-  subscribers
+const mapStateToProps = ({ apis }) => ({
+  apis
 })
 
 const mapDispatchToProps = dispatch => ({
   postApi: input => dispatch(postApiAction(input))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ConstructSubscriber);
+export default connect(mapStateToProps, mapDispatchToProps)(ConstructApi);

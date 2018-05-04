@@ -1,0 +1,70 @@
+// apis
+.pressword-apis-container {
+  margin: 1% 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.pressword-api-container {
+  display: flex;
+  width: 90%;
+  min-height: 75px;
+  flex-direction: column;
+  & > * {
+    margin-top: 1em;
+  }
+  border: 1px solid grey;
+  background: #f9f9f9;
+}
+
+.pressword-api {
+  margin: 2%;
+  display: flex;
+  flex-direction: column;
+  padding: 1%;
+  border: 1px solid $grey;
+  background-color: $white;
+  @media (min-width: $mid-break) {
+    width: 60%
+  }
+  // box-shadow: inset 1px 1px 5px #999;
+}
+.pressword-inline-api {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 1em;
+}
+
+.pressword-api-ctas {
+  // margin: 1vw auto;
+  // width: 100%;
+  width: 300px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-left: .5em;
+  & > * {
+    margin: 0 .5em;
+  }
+}
+
+.pressword-cta-btn {
+  color: $wp-blue; 
+  &:hover {
+    color: $burnt;
+  }
+}
+
+.pressword-api-props {
+  display: flex;
+  flex-direction: column;
+}
+
+.pressword-api-meta {
+  color: $wp-blue;
+  font-weight: bold;
+  font-size: 16px;
+}
