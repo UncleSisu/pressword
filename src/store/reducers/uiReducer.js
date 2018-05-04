@@ -8,7 +8,6 @@ let initState = {
 }
 
 const uiReducer = (state = initState, action) => {
-  // console.log('check ui reducer', action);
   const { type, payload } = action
   switch (type) {
     case types.ROUTE_VISIBILITY:

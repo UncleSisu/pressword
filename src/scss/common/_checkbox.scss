@@ -3,9 +3,13 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 50vw;
+  // width: 50vw;
+  @media (max-width: 1330px) {
+    flex-direction: column;
+  }
   @media (max-width: $mid-break) {
     width: 100%;
+    flex-direction: row;
   }
   @media (max-width: $mobile-break) {
     flex-direction: column;

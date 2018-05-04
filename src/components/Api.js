@@ -10,27 +10,22 @@ class Api extends Component {
   constructor(props) {
     super(props)
     this.state = this.getInitialState();
-    this.handleChange = this.handleChange.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
-    this.handleActivation = this.handleActivation.bind(this);
-    this.showApi = this.showApi.bind(this);
-    // this.handleCTAdisplay = this.handleCTAdisplay.bind(this);
   }
 
-  getInitialState() {
+  getInitialState = () => {
     return {
       edit: false,
       show: false,
       ctas: false,
-      // ischecked: false
+      isChecked: false
     }
   }
 
-  resetState() {
+  resetState = () => {
     this.setState(this.getInitialState());
   }
 
-  handleChange(e) {
+  handleChange = (e) => {
     this.setState({
       edit: !this.state.edit
     })
@@ -40,24 +35,30 @@ class Api extends Component {
     }
   }
 
-  showApi(e) {
+  showApi = (e) => {
     this.setState({show: !this.state.show})
   }
 
-  handleCTAdisplay(view) {
+  handleCTAdisplay = (view) => {
     this.setState({ctas: view})
   }
 
-  handleActivation(e) {
+  handleActivation = (e) => {
     console.log('hi mom deactivate please', this.props.api)
     const active = this.props.active === 'true' ? false : true;
-    this.props.handleUpdate(this.props.api, 'active', active);
+    // this.props.handleUpdate(this.props.api, 'active', active);
+    this.props.handleUpdate(this.props.name, 'active', active, 'update', 'single');
   }
 
-  handleDelete(e) {
+  handleDelete = (e) => {
     this.props.deleteApi({
       name: this.props.name
     })
+  }
+
+  handleCheckboxChange = () => {
+    const { handleCheckboxChange, name } = this.props;
+    this.setState({isChecked: !this.state.isChecked}, () => handleCheckboxChange(name));
   }
 
   render() {
@@ -68,7 +69,9 @@ class Api extends Component {
         <div className="pressword-inline-api">
           <input
             type="checkbox"
-            value=""
+            checked={this.state.isChecked}
+            label={name}
+            onChange={this.handleCheckboxChange}
           />
           <div className="pressword-api-meta">{name}</div>
         </div>

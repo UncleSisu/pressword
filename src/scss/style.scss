@@ -1,16 +1,8 @@
 // vars
 @import 'vars';
 
-// common
-@import 'common/construct';
-@import 'common/properties';
-@import 'common/header';
-@import 'common/configure';
-@import 'common/api';
-@import 'common/checkbox';
-
 .pressword-btn {
-  background: $grey;
+  background: $wp-blue;
   // padding: .8vw 4vw;
   padding: 15px 65px;
   font-size: 14px;
@@ -50,3 +42,13 @@
 .pressword-active-link {
   background-color: $wp-blue;
 }
+
+// common
+@import 'common/construct';
+@import 'common/properties';
+@import 'common/header';
+@import 'common/configure';
+@import 'common/api';
+@import 'common/checkbox';
+@import 'common/info';
+

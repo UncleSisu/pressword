@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Api from './Api';
 
 export default props => {
-    const { apis, handleUpdate } = props;
+    const { apis, handleUpdate, handleCheckboxChange } = props;
     const apisRegistry = Object.keys(apis);
     return (
       <div className="pressword-apis-container">
@@ -18,6 +18,7 @@ export default props => {
                 properties={apis[api].properties}
                 hooks={apis[api].hooks}
                 active={apis[api].active}
+                handleCheckboxChange={handleCheckboxChange}
                 handleUpdate={handleUpdate}
               />
             )

@@ -4,27 +4,26 @@ class ConstructProperty extends Component {
   constructor(props) {
     super(props)
     this.state = this.getInitialState();
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  getInitialState() {
+  getInitialState = () => {
     return {
       property_name: "",
       property_value: ""
     }
   }
 
-  resetState() {
+  resetState = () => {
     this.setState(this.getInitialState());
   }
 
-  handlePropertyInput(event, type) {
+  handlePropertyInput = (event, type) => {
     let update = {};
     update[`property_${type}`] = event.target.value;
     this.setState(update);
   }
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     const { property_name, property_value } = this.state;
     const property = {
       name: property_name,

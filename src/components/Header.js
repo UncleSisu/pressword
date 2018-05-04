@@ -5,15 +5,14 @@ import { setVisibilityAction } from '../store/actions/uiActions'
 class Header extends Component {
   constructor(props) {
     super(props)
-    this.setVisibility = this.setVisibility.bind(this)
   }
 
-  setVisibility(e, route) {
+  setVisibility = (e, route) => {
     this.props.changeVisibility(route)
   }
 
 
-  setNavStatus(route, active) {
+  setNavStatus = (route, active) => {
     return active === route ? 'pressword-active-link' : '';
   }
 

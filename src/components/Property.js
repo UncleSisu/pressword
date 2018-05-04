@@ -4,10 +4,9 @@ import PropTypes from 'prop-types';
 class Property extends Component {
   constructor(props) {
     super(props)
-    this.handleRemoval = this.handleRemoval.bind(this);
   }
 
-  handleRemoval(e, property) {
+  handleRemoval = (e, property) => {
     this.props.removeProperty(property);
   }
 

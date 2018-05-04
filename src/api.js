@@ -1,26 +1,20 @@
 import $ from 'jquery'
 
 export const postApi = (url, payload) => {
-  // console.log('postApi triggered?', url, input)
   return postRequest(url, 'post_new_api', handleData, payload);
 }
 
 export const getApis = (url) => {
-  // console.log('getApis triggered?', url)
   return postRequest(url, 'get_pressword_apis', handleData);
 }
 
 export const deleteApi = (url, payload) => {
-  // console.log('deleteApi triggered?', url, input)
-  return postRequest(url, 'delete_api', handleData, payload);
+  return postRequest(url, 'pressword_rest_delete', handleData, payload);
 }
 
 function handleData(data) {
   console.log('handleData response return', data.apis);
   return data.apis;
-  // return {
-  //   apis: data.apis
-  // }
 }
 
 function postRequest(url, action, handler, payload = {}) {

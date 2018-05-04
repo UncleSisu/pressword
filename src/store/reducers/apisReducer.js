@@ -9,7 +9,6 @@ const apisReducer = (state = { }, action) => {
     case types.GET_APIS_ERROR:
     case types.DELETE_API_SUCCESS:
     case types.DELETE_API_ERROR:
-      // console.log('check apis reducer', status);
       return {
         ...state,
         apis: status

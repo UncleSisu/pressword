@@ -1,4 +1,24 @@
 // configure
+.pressword-config-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+
+.pressword-configurations-container {
+  // margin: 3% 0;
+  display: flex;
+  flex-direction: column;
+  width: 60vw;
+  @media (max-width: 1330px) {
+    width: 40vw;
+  }
+  @media (max-width: $mid-break) {
+    margin: 3% 0;
+    width: 100vw;
+  }
+}
+
 .pressword-config-head {
   width: 350px;
 }
@@ -53,4 +73,15 @@
   &:hover {
     background:#f34343;
   }
+}
+
+.pressword-config-bulkactions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.pressword-config-bulk-submit {
+  @extend .pressword-btn;
+  padding: 8px 22px;
 }

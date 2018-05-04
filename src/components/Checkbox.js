@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 class Checkbox extends Component {
   constructor(props){
     super(props)
-    this.toggleCheckboxChange = this.toggleCheckboxChange.bind(this);
   }
 
   componentDidMount() {
@@ -13,7 +12,7 @@ class Checkbox extends Component {
     }
   }
 
-  toggleCheckboxChange() {
+  toggleCheckboxChange = () => {
     const { handleCheckboxChange, label, type } = this.props;
 
     this.props.setBoxState(type, label)

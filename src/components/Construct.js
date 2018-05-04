@@ -7,26 +7,23 @@ export default class Construct extends Component {
   constructor(props) {
     super(props)
     this.state = this.getInitialState();
-
-    this.startConstruct = this.startConstruct.bind(this)
-    this.stopConstruct = this.stopConstruct.bind(this)
   }
 
-  getInitialState() {
+  getInitialState = () => {
     return {
       construct: false
     };
   }
 
-  resetState() {
+  resetState = () => {
     this.setState(this.getInitialState());
   }
 
-  startConstruct() {
+  startConstruct = () => {
     this.setState({ construct: true })
   }
 
-  stopConstruct(e) {
+  stopConstruct = () => {
     this.setState({ construct: false })
   }
 

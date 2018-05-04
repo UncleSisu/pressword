@@ -4,11 +4,13 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+
+  // width: 90%;
 }
 
 .pressword-api-container {
   display: flex;
-  width: 90%;
+  // width: 90%;
   min-height: 75px;
   flex-direction: column;
   & > * {

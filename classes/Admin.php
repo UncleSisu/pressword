@@ -35,16 +35,16 @@ class WPPW_Admin {
 
   public function consumer_actions(){
       // api test
-      add_action('wp_ajax_nopriv_test_pressword_api', array($this, 'test_pressword_api'));
-      add_action('wp_ajax_test_pressword_api', array($this, 'test_pressword_api'));
+      // add_action('wp_ajax_nopriv_bulk_pressword_apis', array($this, 'bulk_pressword_apis'));
+      // add_action('wp_ajax_bulk_pressword_apis', array($this, 'bulk_pressword_apis'));
 
       // api addition
       add_action('wp_ajax_nopriv_post_new_api', array($this, 'post_new_api'));
       add_action('wp_ajax_post_new_api', array($this, 'post_new_api'));
 
       // api removal
-      add_action('wp_ajax_nopriv_delete_api', array($this, 'delete_api'));
-      add_action('wp_ajax_delete_api', array($this, 'delete_api'));
+      add_action('wp_ajax_nopriv_pressword_rest_delete', array($this, 'pressword_rest_delete'));
+      add_action('wp_ajax_pressword_rest_delete', array($this, 'pressword_rest_delete'));
 
       // server apis
       add_action('wp_ajax_nopriv_get_pressword_apis', array($this, 'get_pressword_apis'));
@@ -87,12 +87,52 @@ class WPPW_Admin {
     }
   }
 
+  // public function pressword_rest_bulk(){
+  // public function bulk_pressword_apis(){
+  //   $bulk = $_POST['bulk'];
+  //   $type = $_POST['type'];
+  //
+  //   if ($type == 'get') {
+  //     $this->get_apis();
+  //     return;
+  //   }
+  //
+  //   foreach($bulk as $api) {
+  //     switch($type) {
+  //       case 'delete':
+  //         $this->delete_api($api);
+  //         break;
+  //       case 'post':
+  //         $this->post_api($api);
+  //         break;
+  //     }
+  //   }
+  //
+  //   $apis = get_option('pressword');
+  //
+  //   $json = json_encode(
+  //     array(
+  //       'apis' => $apis
+  //     )
+  //   );
+  //
+  //   echo $json;
+  //   die();
+  // }
+
+  // public function pressword_rest_get(){
   public function get_pressword_apis(){
-    $apis = get_option('pressword');
+    // $apis = get_option('pressword');
+    //
+    // $json = json_encode(
+    //   array(
+    //     'apis' => $apis
+    //   )
+    // );
 
     $json = json_encode(
       array(
-        'apis' => $apis
+        'apis' => $this->get_apis()
       )
     );
 
@@ -100,6 +140,11 @@ class WPPW_Admin {
     die();
   }
 
+  public function get_apis(){
+    return get_option('pressword');
+  }
+
+  // public function pressword_rest_post(){
   public function post_new_api(){
     $name = $_POST['name'];
     $uri = $_POST['uri'];
@@ -119,20 +164,32 @@ class WPPW_Admin {
       );
     }
 
-    $apis = get_option('pressword');
-    $apis[$name] = array(
-      'name' => $name,
-      'uri' => $uri,
-      'hooks' => $hooks,
-      'properties' => $properties,
-      'active' => $active
-    );
-    update_option('pressword', $apis, true);
+    // $apis = get_option('pressword');
+    // $apis[$name] = array(
+    //   'name' => $name,
+    //   'uri' => $uri,
+    //   'hooks' => $hooks,
+    //   'properties' => $properties,
+    //   'active' => $active
+    // );
+    // update_option('pressword', $apis, true);
+    //
+    // $updated_apis = get_option('pressword');
+    // $json = json_encode(
+    //   array(
+    //     'apis' => $updated_apis
+    //   )
+    // );
 
-    $updated_apis = get_option('pressword');
     $json = json_encode(
       array(
-        'apis' => $updated_apis
+        'apis' => $this->post_api(array(
+          'name' => $name,
+          'uri' => $uri,
+          'hooks' => $hooks,
+          'properties' => $properties,
+          'active' => $active)
+        )
       )
     );
 
@@ -140,7 +197,15 @@ class WPPW_Admin {
     die();
   }
 
-  public function delete_api(){
+  public function post_api($api){
+    $apis = get_option('pressword');
+    $apis[$name] = $api;
+    update_option('pressword', $apis, true);
+    return get_option('pressword');
+  }
+
+  // public function pressword_rest_delete(){
+  public function pressword_rest_delete(){
     $name = $_POST['name'];
 
     if( $name == '') {
@@ -154,12 +219,19 @@ class WPPW_Admin {
       );
     }
 
-    $apis = get_option('pressword');
-    unset($apis[$name]);
+    // $apis = get_option('pressword');
+    // unset($apis[$name]);
+    //
+    // update_option('pressword', $apis, true);
+    // $updated_apis = get_option('pressword');
+    //
+    // $json = json_encode(
+    //   array(
+    //     'apis' => $updated_apis
+    //   )
+    // );
 
-    update_option('pressword', $apis, true);
-    $updated_apis = get_option('pressword');
-
+    $updated_apis = $this->delete_api($name);
     $json = json_encode(
       array(
         'apis' => $updated_apis
@@ -168,6 +240,13 @@ class WPPW_Admin {
 
     echo $json;
     die();
+  }
+
+  public function delete_api($name){
+    $apis = get_option('pressword');
+    unset($apis[$name]);
+    update_option('pressword', $apis, true);
+    return get_option('pressword');
   }
 
   public function create_pressword_options_page(){

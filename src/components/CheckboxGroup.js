@@ -9,17 +9,15 @@ class CheckboxGroup extends Component {
   constructor(props) {
     super(props)
     this.state = this.getInitialState();
-    this.toggleCheckbox = this.toggleCheckbox.bind(this);
-    this.setBoxState = this.setBoxState.bind(this);
   }
 
-  getInitialState() {
+  getInitialState = () => {
     return {
       boxes: this.initialBoxes()
     };
   }
 
-  resetState() {
+  resetState = () => {
     this.setState(this.getInitialState());
   }
 
@@ -46,7 +44,7 @@ class CheckboxGroup extends Component {
     }, {})
   }
 
-  toggleCheckbox(type, label) {
+  toggleCheckbox = (type, label) => {
     if (this.selectedCheckboxes[type].has(label)) {
       this.selectedCheckboxes[type].delete(label);
     } else {
@@ -67,7 +65,7 @@ class CheckboxGroup extends Component {
     this.props.submitHooks(hooks);
   }
 
-  setBoxState(type, label) {
+  setBoxState = (type, label) => {
     let {boxes} = this.state;
     let checked = boxes[type][label];
     boxes[type][label] = !checked;

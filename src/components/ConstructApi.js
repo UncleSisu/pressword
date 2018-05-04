@@ -9,15 +9,9 @@ class ConstructApi extends Component {
   constructor(props) {
     super(props)
     this.state = this.getInitialState(props.api);
-
-    // bind events
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handlePropertySubmit = this.handlePropertySubmit.bind(this);
-    this.handlePropertyRemoval = this.handlePropertyRemoval.bind(this);
-    this.submitHooks = this.submitHooks.bind(this);
   }
 
-  getInitialState(api) {
+  getInitialState = (api) => {
     let state = api || {
       name: "",
       uri: "",
@@ -31,11 +25,11 @@ class ConstructApi extends Component {
     return state;
   }
 
-  resetState() {
+  resetState = () => {
     this.setState(this.getInitialState());
   }
 
-  handleSubmit(e) {
+  handleSubmit = (e) => {
     const { name, uri, hooks, properties, active } = this.state;
     this.props.postApi({
       name,
@@ -51,14 +45,14 @@ class ConstructApi extends Component {
     this.resetState();
   }
 
-  handleApiInput(event, type) {
+  handleApiInput = (event, type) => {
     let update = {};
     update[type] = event.target.value;
     this.setState(update);
   }
 
   // Properties
-  handlePropertySubmit(property) {
+  handlePropertySubmit = (property) => {
     const { properties } = this.state;
     properties.push(property);
     this.setState({
@@ -66,7 +60,7 @@ class ConstructApi extends Component {
     });
   }
 
-  handlePropertyRemoval(property) {
+  handlePropertyRemoval = (property) => {
     const properties = this.state.properties.filter(prop => {
       return prop.name !== property.name;
     })
@@ -74,20 +68,13 @@ class ConstructApi extends Component {
   }
 
   // Checkbox/Hook submission
-  submitHooks(hooks) {
+  submitHooks = (hooks) => {
     this.setState({ hooks });
   }
 
   render() {
     return (
       <div className="pressword-construct-container">
-        {
-          this.props.finishEdit ? 
-          (<div className="pressword-construct-exit" onClick={this.props.finishEdit}>
-            <span>X</span>
-          </div>)
-           : null
-        }
         <div className="pressword-new-api-container form-inline">
           <input
             value={this.state.name}
@@ -113,7 +100,8 @@ class ConstructApi extends Component {
           />
         </div>
         <div className="pressword-construct-ctas">
-          <span className="pressword-api-submit pressword-btn" onClick={this.handleSubmit}>{this.props.finishEdit ? 'Save API' : 'Add API'}</span>
+          <span className="pressword-api-submit pressword-btn" onClick={this.handleSubmit}>Save</span>
+          <span className="pressword-api-exit pressword-btn" onClick={this.props.finishEdit}>Exit</span>
         </div>
       </div>
     );
