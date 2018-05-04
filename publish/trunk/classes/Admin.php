@@ -65,7 +65,8 @@ class WPPW_Admin {
           'properties' => array(
             'name' => 'test',
             'value' => 'foobar'
-          )
+          ),
+          'active' => true
         ),
         'example-api' => array(
           'name' => 'example-api',
@@ -77,7 +78,8 @@ class WPPW_Admin {
           'properties' => array(
             'name' => 'foobar',
             'value' => 'fooit'
-          )
+          ),
+          'active' => false
         )
       );
 
@@ -98,32 +100,12 @@ class WPPW_Admin {
     die();
   }
 
-  // needs to be updated
-  // public function test_pressword_api(){
-  //   $name = $_POST['name'];
-  //   $api = get_option('pressword')[$name];
-  //   $res = $this->checkAPI($api);
-  //
-  //   if ($res) {
-  //     $res = json_decode($res['body'], true);
-  //     echo json_encode(
-  //       array(
-  //         'name' => $name,
-  //         'data' => $res
-  //       )
-  //     );
-  //   } else {
-  //     echo 'No response';
-  //   }
-  //   die();
-  // }
-
-
   public function post_new_api(){
     $name = $_POST['name'];
     $uri = $_POST['uri'];
     $hooks = $_POST['hooks'];
     $properties = $_POST['properties'];
+    $active = $_POST['active'];
 
     if( $name == '' || $uri == '' ) {
       die(
@@ -142,7 +124,8 @@ class WPPW_Admin {
       'name' => $name,
       'uri' => $uri,
       'hooks' => $hooks,
-      'properties' => $properties
+      'properties' => $properties,
+      'active' => $active
     );
     update_option('pressword', $apis, true);
 
@@ -197,10 +180,9 @@ class WPPW_Admin {
       $icon = 'dashicons-admin-plugins';
       $position = 100;
 
-      // add_menu_page( $page_title, $menu_title, $capability, $slug, $callback, $icon, $position );
+      add_menu_page( $page_title, $menu_title, $capability, $slug, $callback, $icon, $position );
       // add_submenu_page('options-general.php', $page_title, $menu_title, $capability, $slug, $callback);
-
-      add_options_page($page_title, $menu_title, $capability, $slug, $callback);
+      // add_options_page($page_title, $menu_title, $capability, $slug, $callback);
   }
 
   public function pressword_settings_page_content(){
@@ -209,7 +191,6 @@ class WPPW_Admin {
     do_settings_sections( 'pressword' );
     ?>
      <div class="wrap">
-        <h2>PressWord</h2>
         <form method="post" action="options.php">
           <div id="pressword-root"></div>
         </form>
