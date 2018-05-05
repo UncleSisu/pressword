@@ -60,13 +60,13 @@ export default class Configure extends Component {
     console.log('check the bulk', this.state.checked, this.state.bulkAction)
       switch(this.state.bulkAction){
         case 'delete':
-          this.handleUpdate(this.state.checked, null, null, 'delete', 'bulk')
+          this.handleUpdate(this.state.checked, null, null, 'delete')
           break;
         case 'activate':
-          this.handleUpdate(this.state.checked, 'active', true, 'update', 'bulk')
+          this.handleUpdate(this.state.checked, 'active', true, 'post')
           break;
         case 'deactivate':
-          this.handleUpdate(this.state.checked, 'active', false, 'update', 'bulk')
+          this.handleUpdate(this.state.checked, 'active', false, 'post')
           break;
         default:
           break;

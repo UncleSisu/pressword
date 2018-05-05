@@ -12,6 +12,7 @@ class Api extends Component {
     this.state = this.getInitialState();
   }
 
+  // TODO: reset checked on bulk action
   getInitialState = () => {
     return {
       edit: false,
@@ -44,10 +45,8 @@ class Api extends Component {
   }
 
   handleActivation = (e) => {
-    console.log('hi mom deactivate please', this.props.api)
     const active = this.props.active === 'true' ? false : true;
-    // this.props.handleUpdate(this.props.api, 'active', active);
-    this.props.handleUpdate(this.props.name, 'active', active, 'update', 'single');
+    this.props.handleUpdate(this.props.name, 'active', active, 'post');
   }
 
   handleDelete = (e) => {

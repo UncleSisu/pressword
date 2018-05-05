@@ -1,15 +1,19 @@
 import $ from 'jquery'
 
 export const postApi = (url, payload) => {
-  return postRequest(url, 'post_new_api', handleData, payload);
+  return postRequest(url, 'pressword_rest_post', handleData, payload);
 }
 
 export const getApis = (url) => {
-  return postRequest(url, 'get_pressword_apis', handleData);
+  return postRequest(url, 'pressword_rest_get', handleData);
 }
 
 export const deleteApi = (url, payload) => {
   return postRequest(url, 'pressword_rest_delete', handleData, payload);
+}
+
+export const bulkApi = (url, payload) => {
+  return postRequest(url, 'pressword_rest_bulk', handleData, payload);
 }
 
 function handleData(data) {

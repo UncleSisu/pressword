@@ -1,6 +1,6 @@
 import 'regenerator-runtime/runtime'
 import { takeLatest, take } from 'redux-saga/effects'
-import { postApiSaga, getApisSaga, deleteApiSaga } from './apisSaga'
+import { postApiSaga, getApisSaga, deleteApiSaga, bulkApiSaga} from './apisSaga'
 import * as types from '../../constants/actionTypes'
 
 export function* watchApiPost () {
@@ -13,4 +13,8 @@ export function* watchApiGet () {
 
 export function* watchApiDelete () {
   yield takeLatest(types.DELETE_API, deleteApiSaga)
+}
+
+export function* watchApiBulk () {
+  yield takeLatest(types.BULK_API, bulkApiSaga)
 }

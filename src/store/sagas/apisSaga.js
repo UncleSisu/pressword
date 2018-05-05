@@ -1,6 +1,6 @@
 import 'regenerator-runtime/runtime'
 import { put, call } from 'redux-saga/effects'
-import { postApi, getApis, deleteApi } from '../../api'
+import { postApi, getApis, deleteApi, bulkApi } from '../../api'
 import * as types from '../../constants/actionTypes'
 
 export function* postApiSaga ({ payload }) {
@@ -13,6 +13,21 @@ export function* postApiSaga ({ payload }) {
   } catch (error) {
     yield put({
       type: types.POST_API_ERROR,
+      status,
+    })
+  }
+}
+
+export function* bulkApiSaga ({ payload }) {
+  try {
+    const status = yield call(bulkApi, types.URL, payload)
+    yield put({
+      type: types.BULK_API_SUCCESS,
+      status,
+    })
+  } catch (error) {
+    yield put({
+      type: types.BULK_API_ERROR,
       status,
     })
   }

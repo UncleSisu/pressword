@@ -5,6 +5,11 @@ export const postApiAction = payload => ({
   payload,
 })
 
+export const bulkApiAction = payload => ({
+  type: types.BULK_API,
+  payload,
+})
+
 export const deleteApiAction = payload => ({
   type: types.DELETE_API,
   payload,
