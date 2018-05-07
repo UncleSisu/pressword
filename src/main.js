@@ -27,7 +27,7 @@ class Main extends Component {
     this.props.getApis();
   }
 
-  handleUpdate = (apiName, prop, value, action) => {
+  handleBulkUpdate = (apiName, prop, value, action) => {
     if (action === 'delete') {
       return this.props.bulkApi({
         bulk: apiName,
@@ -35,29 +35,18 @@ class Main extends Component {
       })
     }
 
-    let apis = [];
-    let apiType = Array.isArray(apiName);
-
-    if (apiType) {
-      apis = apiName.map(name => {
-        return Object.assign({}, this.state.apis[name]);
-      })
-    } else {
-      apis.push(Object.assign({}, this.state.apis[apiName]));
-    }
+    let apis = apiName.map(name => {
+      return Object.assign({}, this.state.apis[name]);
+    })
 
     apis.forEach(api => {
       api[prop] = value
     })
 
-    if (apiType) {
-      this.props.bulkApi({
-        bulk: apis,
-        cmd: action
-      })
-    } else {
-      this.props.postApi(apis.pop())
-    }
+    this.props.bulkApi({
+      bulk: apis,
+      cmd: action
+    })
   }
 
   // operator(route) {
@@ -79,7 +68,7 @@ class Main extends Component {
         {/* <Header /> */}
         {/* this.operator(this.props.ui.routeVisible) */}
         <Construct />
-        <Configure apis={apis} handleUpdate={this.handleUpdate}/>
+        <Configure apis={apis} handleBulkUpdate={this.handleBulkUpdate}/>
       </section>
     )
   }

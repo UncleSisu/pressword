@@ -24,10 +24,6 @@ export default class Configure extends Component {
     this.setState(this.getInitialState());
   }
 
-  handleUpdate = (apiName, prop, value, action) => {
-    this.props.handleUpdate(apiName, prop, value, action);
-  }
-
   handleSearch = (name) => {
     this.setState({
       search: name
@@ -58,13 +54,13 @@ export default class Configure extends Component {
   handleBulkAction = (ev) => {
       switch(this.state.bulkAction){
         case 'delete':
-          this.handleUpdate(this.state.checked, null, null, 'delete')
+          this.props.handleBulkUpdate(this.state.checked, null, null, 'delete')
           break;
         case 'activate':
-          this.handleUpdate(this.state.checked, 'active', true, 'post')
+          this.props.handleBulkUpdate(this.state.checked, 'active', true, 'post')
           break;
         case 'deactivate':
-          this.handleUpdate(this.state.checked, 'active', false, 'post')
+          this.props.handleBulkUpdate(this.state.checked, 'active', false, 'post')
           break;
         default:
           break;
@@ -149,7 +145,6 @@ export default class Configure extends Component {
           </div>
           <Apis
             apis={visibleApis}
-            handleUpdate={this.handleUpdate}
             handleCheckboxChange={this.handleCheckboxChange}
             checkall={this.state.checkall}
           />

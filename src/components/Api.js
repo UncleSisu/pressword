@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ConstructApi from './ConstructApi'
 import Properties from './Properties'
 import { connect } from 'react-redux'
-import { deleteApiAction } from '../store/actions/apisActions'
+import { deleteApiAction, postApiAction } from '../store/actions/apisActions'
 import PropTypes from 'prop-types';
 
 
@@ -53,7 +53,9 @@ class Api extends Component {
 
   handleActivation = (e) => {
     const active = this.props.active === 'true' ? false : true;
-    this.props.handleUpdate(this.props.name, 'active', active, 'post');
+    let api = Object.assign({}, this.props.api);
+    api.active = active;
+    this.props.postApi(api)
   }
 
   handleDelete = (e) => {
@@ -154,7 +156,8 @@ const mapStateToProps = ({ apis }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  deleteApi: input => dispatch(deleteApiAction(input))
+  deleteApi: input => dispatch(deleteApiAction(input)),
+  postApi: input => dispatch(postApiAction(input))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Api);
