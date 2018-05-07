@@ -3,9 +3,9 @@ Contributors: blakesisu, stevewaller
 Donate link: http://sisumedia.com/
 Tags: pressword, event, api
 Requires PHP: 5.2.4
-Requires at least: 0.1
-Tested up to: 0.1
-Stable tag: 0.1
+Requires at least: 0.1.1
+Tested up to: 0.1.1
+Stable tag: 0.1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -43,7 +43,16 @@ Answer to foo bar dilemma.
 * Beta Release!.
 * Use with caution! Security features not implemented yet!
 
+= 0.1.1 =
+* Still Beta (working on security)
+* Updated UX consistency
+* Added activation/deactivation option of APIs
+* Added bulk actions and selection
+
 == Upgrade Notice ==
 
 = 0.1 =
 First release!
+
+= 0.1.1 =
+First patch and upload to WordPress!
