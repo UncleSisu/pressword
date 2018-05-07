@@ -26,6 +26,13 @@ class Api extends Component {
     this.setState(this.getInitialState());
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.checkall !== this.props.checkall) {
+      this.handleCheckboxChange(null, nextProps.checkall);
+    }
+    // return;
+  }
+
   handleChange = (e) => {
     this.setState({
       edit: !this.state.edit
@@ -55,13 +62,27 @@ class Api extends Component {
     })
   }
 
-  handleCheckboxChange = () => {
+  handleCheckboxChange = (event, checkValue = null) => {
     const { handleCheckboxChange, name } = this.props;
-    this.setState({isChecked: !this.state.isChecked}, () => handleCheckboxChange(name));
+    let isChecked;
+    if (checkValue === null) {
+      isChecked = !this.state.isChecked;
+    } else {
+      isChecked = checkValue;
+    }
+    this.setState({isChecked}, () => handleCheckboxChange(name));
   }
 
   render() {
-    const { name, uri, properties, hooks, api, active } = this.props;
+    let {
+      name,
+      uri,
+      properties,
+      hooks,
+      api,
+      active
+    } = this.props;
+
     return (
       <div className="pressword-api-container" onMouseEnter={() => !this.state.edit && this.handleCTAdisplay(true)} onMouseLeave={() => this.handleCTAdisplay(false)}>
 
@@ -70,7 +91,7 @@ class Api extends Component {
             type="checkbox"
             checked={this.state.isChecked}
             label={name}
-            onChange={this.handleCheckboxChange}
+            onChange={e => this.handleCheckboxChange(e)}
           />
           <div className="pressword-api-meta">{name}</div>
         </div>

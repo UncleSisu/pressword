@@ -128,7 +128,6 @@ class WPPW_Admin {
   }
 
   public function pressword_rest_post(){
-  // public function post_new_api(){
     $name = $_POST['name'];
     $uri = $_POST['uri'];
     $hooks = $_POST['hooks'];

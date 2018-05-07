@@ -2,7 +2,7 @@ import React from 'react';
 import Api from './Api';
 
 export default props => {
-    const { apis, handleUpdate, handleCheckboxChange } = props;
+    const { apis, handleUpdate, handleCheckboxChange, checkall } = props;
     const apisRegistry = Object.keys(apis);
     return (
       <div className="pressword-apis-container">
@@ -20,6 +20,7 @@ export default props => {
                 active={apis[api].active}
                 handleCheckboxChange={handleCheckboxChange}
                 handleUpdate={handleUpdate}
+                checkall={checkall}
               />
             )
           })

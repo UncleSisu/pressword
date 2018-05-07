@@ -40,10 +40,10 @@ class Main extends Component {
 
     if (apiType) {
       apis = apiName.map(name => {
-        return Object.create(this.state.apis[name]);
+        return Object.assign({}, this.state.apis[name]);
       })
     } else {
-      apis.push(Object.create(this.state.apis[apiName]));
+      apis.push(Object.assign({}, this.state.apis[apiName]));
     }
 
     apis.forEach(api => {

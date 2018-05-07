@@ -15,6 +15,7 @@ export default class Configure extends Component {
       search: "",
       searching: false,
       checked: [],
+      checkall: false,
       bulkAction: ''
     }
   }
@@ -23,7 +24,7 @@ export default class Configure extends Component {
     this.setState(this.getInitialState());
   }
 
-  handleUpdate = (apiName, prop, value, action, type) => {
+  handleUpdate = (apiName, prop, value, action) => {
     this.props.handleUpdate(apiName, prop, value, action);
   }
 
@@ -51,13 +52,10 @@ export default class Configure extends Component {
     } else {
       checked.push(name);
     }
-    this.setState({
-      checked
-    }, () => console.log('after checked', this.state))
+    this.setState({ checked });
   }
 
   handleBulkAction = (ev) => {
-    console.log('check the bulk', this.state.checked, this.state.bulkAction)
       switch(this.state.bulkAction){
         case 'delete':
           this.handleUpdate(this.state.checked, null, null, 'delete')
@@ -78,19 +76,25 @@ export default class Configure extends Component {
     this.setState({bulkAction: event.target.value})
   }
 
-  render() {
+  handleCheckallChange = (event) => {
+    this.setState({checkall: !this.state.checkall});
+  }
+
+  handleApis = () => {
     let visibleApis;
     const apis = Object.keys(this.props.apis);
     const all = apis.length;
     const activeLength = apis.filter( api => {
       return this.props.apis[api].active === 'true';
     }).length;
+
     const active = apis.reduce(( acc,curr ) => {
       if (this.props.apis[curr].active === 'true') {
         acc[curr] = this.props.apis[curr];
       }
       return acc;
     }, {});
+
     const searched = apis.reduce(( acc,curr ) => {
       if (this.props.apis[curr].name.indexOf(this.state.search) > -1) {
         acc[curr] = this.props.apis[curr];
@@ -104,12 +108,28 @@ export default class Configure extends Component {
       visibleApis = this.props.apis;
     }
 
+    return {
+      visibleApis,
+      all,
+      activeLength
+    }
+  }
+
+  render() {
+    let { visibleApis, all, activeLength } = this.handleApis();
+
     return (
       <div className='pressword-config-container'>
         <div className='pressword-configurations-container'>
           <div className="pressword-config-head">
             { !this.state.searching ? (
             <div className="pressword-config-head-options">
+              <input
+                type="checkbox"
+                checked={this.state.checkall}
+                label="selectallbox"
+                onChange={this.handleCheckallChange}
+              />
               <h1><span onClick={() => this.handleSearch('')}>All ({all})</span> |</h1>
               <h1><span onClick={() => this.handleSearch('active')}>Active ({activeLength})</span> | </h1>
               <h1><span onClick={this.handleSearchDisplay}>Search</span></h1>
@@ -131,6 +151,7 @@ export default class Configure extends Component {
             apis={visibleApis}
             handleUpdate={this.handleUpdate}
             handleCheckboxChange={this.handleCheckboxChange}
+            checkall={this.state.checkall}
           />
 
           <div className="pressword-config-bulkactions">
