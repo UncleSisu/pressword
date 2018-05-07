@@ -35,20 +35,20 @@ class WPPW_Admin {
 
   public function consumer_actions(){
       // api test
-      add_action('wp_ajax_nopriv_test_pressword_api', array($this, 'test_pressword_api'));
-      add_action('wp_ajax_test_pressword_api', array($this, 'test_pressword_api'));
+      add_action('wp_ajax_nopriv_pressword_rest_bulk', array($this, 'pressword_rest_bulk'));
+      add_action('wp_ajax_pressword_rest_bulk', array($this, 'pressword_rest_bulk'));
 
       // api addition
-      add_action('wp_ajax_nopriv_post_new_api', array($this, 'post_new_api'));
-      add_action('wp_ajax_post_new_api', array($this, 'post_new_api'));
+      add_action('wp_ajax_nopriv_pressword_rest_post', array($this, 'pressword_rest_post'));
+      add_action('wp_ajax_pressword_rest_post', array($this, 'pressword_rest_post'));
 
       // api removal
-      add_action('wp_ajax_nopriv_delete_api', array($this, 'delete_api'));
-      add_action('wp_ajax_delete_api', array($this, 'delete_api'));
+      add_action('wp_ajax_nopriv_pressword_rest_delete', array($this, 'pressword_rest_delete'));
+      add_action('wp_ajax_pressword_rest_delete', array($this, 'pressword_rest_delete'));
 
       // server apis
-      add_action('wp_ajax_nopriv_get_pressword_apis', array($this, 'get_pressword_apis'));
-      add_action('wp_ajax_get_pressword_apis', array($this, 'get_pressword_apis'));
+      add_action('wp_ajax_nopriv_pressword_rest_get', array($this, 'pressword_rest_get'));
+      add_action('wp_ajax_pressword_rest_get', array($this, 'pressword_rest_get'));
 
   }
 
@@ -87,8 +87,20 @@ class WPPW_Admin {
     }
   }
 
-  public function get_pressword_apis(){
-    $apis = get_option('pressword');
+  public function pressword_rest_bulk(){
+    $bulk = $_POST['bulk'];
+    $cmd = $_POST['cmd'];
+
+    foreach($bulk as $item) {
+      switch($cmd) {
+        case 'delete':
+          $apis = $this->delete_api($item);
+          break;
+        case 'post':
+          $apis = $this->post_api($item);
+          break;
+      }
+    }
 
     $json = json_encode(
       array(
@@ -100,7 +112,22 @@ class WPPW_Admin {
     die();
   }
 
-  public function post_new_api(){
+  public function pressword_rest_get(){
+    $json = json_encode(
+      array(
+        'apis' => $this->get_apis()
+      )
+    );
+
+    echo $json;
+    die();
+  }
+
+  public function get_apis(){
+    return get_option('pressword');
+  }
+
+  public function pressword_rest_post(){
     $name = $_POST['name'];
     $uri = $_POST['uri'];
     $hooks = $_POST['hooks'];
@@ -119,20 +146,15 @@ class WPPW_Admin {
       );
     }
 
-    $apis = get_option('pressword');
-    $apis[$name] = array(
-      'name' => $name,
-      'uri' => $uri,
-      'hooks' => $hooks,
-      'properties' => $properties,
-      'active' => $active
-    );
-    update_option('pressword', $apis, true);
-
-    $updated_apis = get_option('pressword');
     $json = json_encode(
       array(
-        'apis' => $updated_apis
+        'apis' => $this->post_api(array(
+          'name' => $name,
+          'uri' => $uri,
+          'hooks' => $hooks,
+          'properties' => $properties,
+          'active' => $active)
+        )
       )
     );
 
@@ -140,7 +162,14 @@ class WPPW_Admin {
     die();
   }
 
-  public function delete_api(){
+  public function post_api($api){
+    $apis = get_option('pressword');
+    $apis[$api['name']] = $api;
+    update_option('pressword', $apis, true);
+    return get_option('pressword');
+  }
+
+  public function pressword_rest_delete(){
     $name = $_POST['name'];
 
     if( $name == '') {
@@ -154,12 +183,7 @@ class WPPW_Admin {
       );
     }
 
-    $apis = get_option('pressword');
-    unset($apis[$name]);
-
-    update_option('pressword', $apis, true);
-    $updated_apis = get_option('pressword');
-
+    $updated_apis = $this->delete_api($name);
     $json = json_encode(
       array(
         'apis' => $updated_apis
@@ -168,6 +192,13 @@ class WPPW_Admin {
 
     echo $json;
     die();
+  }
+
+  public function delete_api($name){
+    $apis = get_option('pressword');
+    unset($apis[$name]);
+    update_option('pressword', $apis, true);
+    return get_option('pressword');
   }
 
   public function create_pressword_options_page(){

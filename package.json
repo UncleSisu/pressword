@@ -10,7 +10,7 @@
     "dev": "cross-env NODE_ENV=dev webpack --watch --progress --mode development --config webpack.config.js",
     "build": "webpack -p --progress --mode production --config webpack.config.js",
     "check-outdated": "node check-outdated-deps.js",
-    "migrate": "cp -a build/ publish/trunk/ && cp -a classes/ publish/trunk/ && cp -a pressword.php publish/trunk/ && cp -a setup-hooks.php publish/trunk/",
+    "migrate": "$npm_execpath run build && cp -a build/ publish/trunk/ && cp -a classes/ publish/trunk/ && cp -a pressword.php publish/trunk/ && cp -a setup-hooks.php publish/trunk/",
     "lint": "eslint client"
   },
   "dependencies": {
