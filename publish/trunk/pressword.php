@@ -4,14 +4,14 @@ Plugin Name: PressWord
 Plugin URI: http://wordpress.org/plugins/pressword/
 Description: Utilize WordPress as an event API, pushing out data on selected events to specified endpoints.
 Authors: Blake Watkins, Steven Waller, Unclesisu
-Version: 0.1
+Version: 0.1.1
 Author URI: https://sisumedia.com/
 License: MIT
 */
 
 /**
  * @package PressWord
- * @version 0.1
+ * @version 0.1.1
  */
 /*
 
@@ -42,7 +42,7 @@ class Pressword {
    *
    * @var string
    */
-  public $version = '0.1';
+  public $version = '0.1.1';
     const PLG_CLS_PRFX = 'WPPW_';
 
   /**
